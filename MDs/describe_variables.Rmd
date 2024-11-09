@@ -1,3 +1,9 @@
+---
+title: "Describe variables"
+author: "José Manuel Rodríguez Vélez"
+output: pdf_document
+---
+
 ## Descripción de las variables utilizadas para la optimización de anuncios en estaciones de carga de vehículos eléctricos
 
 ### Optimización a nivel de ciudad
