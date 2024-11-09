@@ -1,0 +1,15 @@
+### Sobre la fuente de datos
+
+<https://www.kaggle.com/datasets/valakhorasani/electric-vehicle-charging-patterns/data>
+
+**Descripción del dataset:**
+
+El dataset "Electric Vehicle Charging Patterns" de Kaggle contiene datos anónimos sobre sesiones de carga, con variables como hora del día, inicio y fin de carga, duración, ubicación, tipo de usuario, y día de la semana. Permite analizar patrones de uso y optimizar la estrategia de anuncios adaptándola al comportamiento de los usuarios en cada ciudad.
+
+**Fiabilidad:**
+
+El creador indica que el dataset es útil para análisis de datos y desarrollo de modelos de machine learning, pero **no es adecuado para investigaciones académicas**, ya que los datos podrían ser simulados y no reflejan escenarios reales.
+
+**Uso en el proyecto:**
+
+A pesar de estas limitaciones, el dataset es adecuado para el propósito de este proyecto, que consiste en analizar patrones de carga para optimizar la colocación de anuncios en estaciones de carga de vehículos eléctricos. El análisis se realizará a nivel de ciudad, considerando el volumen de datos disponible y buscando identificar momentos óptimos para mostrar anuncios, particularmente anuncios de hoteles, basados en el comportamiento de los usuarios y las características de las estaciones.
