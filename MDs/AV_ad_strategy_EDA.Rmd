@@ -1,0 +1,26 @@
+---
+title: "EV Ad Strategy - EDA"
+author: "José Manuel Rodríguez Vélez"
+date: "2024-11-11"
+output: pdf_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+## EDA (Exploratory Data Analisis)
+
+En las siguientes secciones, realizaré:
+
+1.  El EDA del conjunto de datos.
+
+2.  Un análisis univariado de las variables seleccionadas.
+
+3.  Un análisis bi/multivariado de las variables seleccionadas.
+
+4.  Comentarios sobre problemas encontrados en los datos.
+
+5.  La sección “¿Qué nos dicen los datos?”
+    para resumir los hallazgos y proporcionar ideas sobre los próximos pasos.
+
+Notebook en Kaggle: <https://www.kaggle.com/code/marthinal/data-driven-ad-strategy-for-ev-charging-stations>
