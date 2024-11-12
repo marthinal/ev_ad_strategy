@@ -1,0 +1,42 @@
+---
+title: "EV Ad Strategy - EDA"
+author: "José Manuel Rodríguez Vélez"
+date: "2024-11-11"
+output: pdf_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+## EDA (Exploratory Data Analisis)
+
+En las siguientes secciones, realizaré:
+
+### 1. EDA del conjunto de datos.
+
+El primer paso en el Análisis Exploratorio de Datos (EDA) es cargar el dataset para poder comenzar con la exploración y análisis.
+En este caso, estoy utilizando el archivo CSV que contiene los patrones de carga de vehículos eléctricos.
+Para cargar los datos, utilizo la función `read.csv()` en R, que me permite importar el dataset desde la ruta especificada.
+
+#### Código para cargar los datos:
+
+``` r
+# Cargar los datos usando read.csv()
+ruta_csv <- "~/ev_ad_strategy/ev_charging_patterns.csv"
+datos <- read.csv(ruta_csv, stringsAsFactors = FALSE)
+```
+
+-   `ruta_csv` es la variable donde almaceno la ruta del archivo CSV.
+-   `read.csv()` es la función que utilizo para cargar los datos en R.
+-   `stringsAsFactors = FALSE` asegura que las columnas de texto no se conviertan automáticamente en factores, lo cual facilita el manejo de datos cualitativos.
+
+2.  Un análisis univariado de las variables seleccionadas.
+
+3.  Un análisis bi/multivariado de las variables seleccionadas.
+
+4.  Comentarios sobre problemas encontrados en los datos.
+
+5.  La sección “¿Qué nos dicen los datos?”
+    para resumir los hallazgos y proporcionar ideas sobre los próximos pasos.
+
+Notebook en Kaggle: <https://www.kaggle.com/code/marthinal/data-driven-ad-strategy-for-ev-charging-stations>
