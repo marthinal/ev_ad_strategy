@@ -12,7 +12,7 @@ library(htmltools)
 library(forcats)
 
 # Leer el archivo CSV
-ruta_csv <- "~/ev_ad_strategy/ev_charging_patterns.csv"
+ruta_csv <- "~/ev_ad_strategy/datasources/ev_charging_patterns.csv"
 data <- read.csv(ruta_csv, stringsAsFactors = FALSE)
 
 # Convertir Charging.End.Time a formato de fecha y hora
@@ -91,6 +91,9 @@ boxplot_end_hour <- ggplot(data, aes(x = "", y = End.Hour)) +
   geom_boxplot(fill = end_hour_color) +
   theme(axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
+# Crear la carpeta para guardar el HTML
+dir.create("html_report", showWarnings = FALSE)
+
 # Crear el contenido HTML con todos los gráficos
 html_content <- tags$div(
   tags$h1("Univariate Analysis"),
@@ -106,9 +109,9 @@ html_content <- tags$div(
   ggplotly(boxplot_end_hour)
 )
 
-# Guardar el reporte en un archivo HTML
-htmltools::save_html(html_content, file = "univariate_analysis.html")
-cat("El reporte ha sido guardado como 'univariate_analysis.html'\n")
+# Guardar el reporte en un archivo HTML dentro de la carpeta html_report
+htmltools::save_html(html_content, file = "html_report/univariate_analysis.html")
+cat("El reporte ha sido guardado como 'html_report/univariate_analysis.html'\n")
 
 # Guardar cada gráfico como imagen en la carpeta Images con fondo blanco
 dir.create("Images", showWarnings = FALSE)
