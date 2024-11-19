@@ -109,6 +109,31 @@ html_content <- tags$div(
   ggplotly(boxplot_end_hour)
 )
 
+# Análisis de Charger Type (ordenado de mayor a menor frecuencia)
+charger_type_count <- data %>%
+  group_by(Charger.Type) %>%
+  summarise(Count = n()) %>%
+  arrange(desc(Count))
+
+charger_type_count$Charger.Type <- factor(charger_type_count$Charger.Type, levels = charger_type_count$Charger.Type)
+
+# Gráfico de barras para Charger Type
+bar_chart_chargertype <- ggplot(charger_type_count, aes(x = Charger.Type, y = Count, fill = Charger.Type)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c("DC Fast Charger" = "#FFD700", "Level 1" = "#8B0000", "Level 2" = "#32CD32")) +
+  scale_x_discrete(labels = levels(charger_type_count$Charger.Type)) +
+  theme(legend.position = "none")
+
+# Guardar el gráfico de Charger Type como imagen en la carpeta Images
+ggsave("Images/Charger_Type_Bar.png", bar_chart_chargertype, width = 8, height = 6, bg = "white")
+
+# Añadir el análisis de Charger Type al HTML
+html_content <- tags$div(
+  html_content, # Mantener el contenido existente
+  tags$h2("Charger Type"),
+  ggplotly(bar_chart_chargertype)
+)
+
 # Guardar el reporte en un archivo HTML dentro de la carpeta html_report
 htmltools::save_html(html_content, file = "html_report/univariate_analysis.html")
 cat("El reporte ha sido guardado como 'html_report/univariate_analysis.html'\n")
