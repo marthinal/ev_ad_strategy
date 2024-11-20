@@ -10,7 +10,7 @@ library(plotly)
 library(htmltools)
 
 # Leer el archivo CSV
-ruta_csv <- "~/ev_ad_strategy/ev_charging_patterns.csv"
+ruta_csv <- "~/ev_ad_strategy/datasources/ev_charging_patterns.csv"
 data <- read.csv(ruta_csv, stringsAsFactors = FALSE)
 
 # Convertir Charging.End.Time a formato de fecha y hora
