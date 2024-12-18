@@ -1,0 +1,1594 @@
+
+<h2>Análisis por Rangos (Rate y Temperatura):</h2>
+
+<h3>Rango de Rate: 0-10 kW | Rango de Temperatura: -10 to 0</h3>
+<p><strong>Número de observaciones:</strong> 7</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> 0.09703566</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+      1       2       3       4       5       6       7 
+ 0.7467 -4.7204  2.3567 -1.7719  3.4902 -0.5617  0.4604 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)  
+(Intercept)       6.30679    2.18383   2.888   0.0343 *
+Temperature...C.  0.07146    0.32779   0.218   0.8360  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.975 on 5 degrees of freedom
+Multiple R-squared:  0.009416,	Adjusted R-squared:  -0.1887 
+F-statistic: 0.04753 on 1 and 5 DF,  p-value: 0.836
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>0-10 kW</strong> y el rango de temperatura <strong>-10 to 0°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es baja (0.097), lo que indica una relación débil.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.0094</strong>, lo que significa que solo el 0.94% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.836</strong>, indicando que la temperatura no es un predictor significativo para la duración en este rango.</li>
+</ul>
+<p>
+En conclusión, no hay evidencia estadística suficiente para considerar que la temperatura afecta significativamente la duración de carga en este rango de tasas de carga y temperaturas.
+</p>
+
+
+
+
+<h3>Rango de Rate: 0-10 kW | Rango de Temperatura: 0 to 15</h3>
+<p><strong>Número de observaciones:</strong> 7</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> -0.2147528</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+       1        2        3        4        5        6        7 
+-0.01319  0.72768 -5.21566  6.55468 -1.25469 -2.11120  1.31238 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)  
+(Intercept)        8.8923     2.6182   3.396   0.0193 *
+Temperature...C.  -0.1492     0.3034  -0.492   0.6438  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3.961 on 5 degrees of freedom
+Multiple R-squared:  0.04612,	Adjusted R-squared:  -0.1447 
+F-statistic: 0.2417 on 1 and 5 DF,  p-value: 0.6438
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>0-10 kW</strong> y el rango de temperatura <strong>0 to 15°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es baja y negativa (-0.215), indicando una relación débil y contraria.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.046</strong>, lo que significa que solo el 4.6% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.6438</strong>, indicando que la temperatura no es un predictor significativo para la duración en este rango.</li>
+</ul>
+<p>
+En conclusión, no hay evidencia estadística suficiente para considerar que la temperatura afecta significativamente la duración de carga en este rango de tasas de carga y temperaturas.
+</p>
+
+
+
+
+<h3>Rango de Rate: 0-10 kW | Rango de Temperatura: 15 to 30</h3>
+<p><strong>Número de observaciones:</strong> 7</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> -0.5679319</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+      1       2       3       4       5       6       7 
+ 3.5170  8.2090  0.1458 -7.5332 -1.4183  1.0519 -3.9721 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)       26.7567    13.6887   1.955    0.108
+Temperature...C.  -1.0173     0.6593  -1.543    0.183
+
+Residual standard error: 5.575 on 5 degrees of freedom
+Multiple R-squared:  0.3225,	Adjusted R-squared:  0.1871 
+F-statistic: 2.381 on 1 and 5 DF,  p-value: 0.1835
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>0-10 kW</strong> y el rango de temperatura <strong>15 to 30°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es moderada y negativa (-0.568), lo que indica una relación inversa más notable.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.323</strong>, lo que significa que el 32.3% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.183</strong>, indicando que la temperatura no es un predictor estadísticamente significativo (nivel de significancia del 5%).</li>
+</ul>
+<p>
+En conclusión, aunque existe una correlación moderada negativa, no hay evidencia estadística suficiente para considerar que la temperatura afecta significativamente la duración de carga en este rango de tasas de carga y temperaturas.
+</p>
+
+
+
+
+
+<h3>Rango de Rate: 0-10 kW | Rango de Temperatura: 30 and above</h3>
+<p><strong>Número de observaciones:</strong> 6</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> -0.3069554</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+     1      2      3      4      5      6 
+-2.170  2.343 -3.313 -1.036  1.362  2.815 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)       13.0134    13.1604   0.989    0.379
+Temperature...C.  -0.2508     0.3888  -0.645    0.554
+
+Residual standard error: 2.83 on 4 degrees of freedom
+Multiple R-squared:  0.09422,	Adjusted R-squared:  -0.1322 
+F-statistic: 0.4161 on 1 and 4 DF,  p-value: 0.554
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>0-10 kW</strong> y el rango de temperatura <strong>30 and above°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es negativa (-0.307), lo que indica una relación inversa débil.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.094</strong>, lo que significa que solo el 9.4% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.554</strong>, indicando que la temperatura no es un predictor estadísticamente significativo.</li>
+</ul>
+<p>
+En conclusión, no hay evidencia estadística suficiente para considerar que la temperatura afecta significativamente la duración de carga en este rango de tasas de carga y temperaturas.
+</p>
+
+
+
+<h3>Rango de Rate: 10-35 kW | Rango de Temperatura: -10 to 0</h3>
+<p><strong>Número de observaciones:</strong> 13</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> 0.499726</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.21334 -0.69757 -0.07972  0.51459  1.77230 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)    
+(Intercept)        2.4557     0.5530   4.441 0.000994 ***
+Temperature...C.   0.1927     0.1007   1.913 0.082059 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.066 on 11 degrees of freedom
+Multiple R-squared:  0.2497,	Adjusted R-squared:  0.1815 
+F-statistic: 3.661 on 1 and 11 DF,  p-value: 0.08206
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>10-35 kW</strong> y el rango de temperatura <strong>-10 to 0°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es moderada y positiva (0.500), lo que indica una relación directa notable.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.250</strong>, lo que significa que el 25% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.082</strong>, cercano al nivel de significancia del 5%, sugiriendo que la temperatura podría ser un predictor débilmente significativo.</li>
+</ul>
+<p>
+En conclusión, existe cierta evidencia de que la temperatura podría afectar la duración de carga en este rango de tasas de carga, aunque el nivel de significancia estadística es marginal.
+</p>
+
+
+
+
+<h3>Rango de Rate: 10-35 kW | Rango de Temperatura: 0 to 15</h3>
+<p><strong>Número de observaciones:</strong> 13</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> 0.2315084</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1167 -0.7684 -0.2158  0.6132  1.4338 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)  
+(Intercept)       1.12711    0.56085   2.010   0.0696 .
+Temperature...C.  0.05505    0.06975   0.789   0.4466  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9317 on 11 degrees of freedom
+Multiple R-squared:  0.0536,	Adjusted R-squared:  -0.03244 
+F-statistic: 0.6229 on 1 and 11 DF,  p-value: 0.4466
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>10-35 kW</strong> y el rango de temperatura <strong>0 to 15°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es baja y positiva (0.232), indicando una relación débil.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.0536</strong>, lo que significa que solo el 5.36% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.4466</strong>, indicando que la temperatura no es un predictor estadísticamente significativo.</li>
+</ul>
+<p>
+En conclusión, no hay evidencia estadística suficiente para considerar que la temperatura afecta significativamente la duración de carga en este rango de tasas de carga y temperaturas.
+</p>
+
+
+
+
+
+<h3>Rango de Rate: 10-35 kW | Rango de Temperatura: 15 to 30</h3>
+<p><strong>Número de observaciones:</strong> 17</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> -0.2665152</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.22373 -0.47914 -0.04854  0.28888  1.34923 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)   
+(Intercept)       2.63487    0.81678   3.226  0.00566 **
+Temperature...C. -0.04151    0.03876  -1.071  0.30112   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.7546 on 15 degrees of freedom
+Multiple R-squared:  0.07103,	Adjusted R-squared:  0.009099 
+F-statistic: 1.147 on 1 and 15 DF,  p-value: 0.3011
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>10-35 kW</strong> y el rango de temperatura <strong>15 to 30°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es negativa y débil (-0.267), lo que indica una relación inversa poco significativa.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.071</strong>, lo que significa que solo el 7.1% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.3011</strong>, indicando que la temperatura no es un predictor estadísticamente significativo.</li>
+</ul>
+<p>
+En conclusión, no hay evidencia estadística suficiente para considerar que la temperatura afecta significativamente la duración de carga en este rango de tasas de carga y temperaturas.
+</p>
+
+
+
+<h3>Rango de Rate: 10-35 kW | Rango de Temperatura: 30 and above</h3>
+<p><strong>Número de observaciones:</strong> 12</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> 0.005758765</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1084 -0.6004 -0.2907  0.2510  2.0942 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)
+(Intercept)      1.5892203  1.5255664   1.042    0.322
+Temperature...C. 0.0007265  0.0398941   0.018    0.986
+
+Residual standard error: 1.004 on 10 degrees of freedom
+Multiple R-squared:  3.316e-05,	Adjusted R-squared:  -0.09996 
+F-statistic: 0.0003316 on 1 and 10 DF,  p-value: 0.9858
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>10-35 kW</strong> y el rango de temperatura <strong>30 and above°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es prácticamente nula (0.0058), indicando que no existe relación.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.00003</strong>, lo que significa que menos del 0.01% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.986</strong>, indicando que la temperatura no es un predictor estadísticamente significativo.</li>
+</ul>
+<p>
+En conclusión, no hay evidencia estadística para considerar que la temperatura afecta la duración de carga en este rango de tasas de carga y temperaturas.
+</p>
+
+
+
+
+<h3>Rango de Rate: 35-100 kW | Rango de Temperatura: 0 to 15</h3>
+<p><strong>Número de observaciones:</strong> 12</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> -0.01861332</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.73818 -0.17971 -0.06471  0.18726  0.88198 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)   
+(Intercept)       0.972376   0.300023   3.241  0.00885 **
+Temperature...C. -0.002299   0.039047  -0.059  0.95421   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.4441 on 10 degrees of freedom
+Multiple R-squared:  0.0003465,	Adjusted R-squared:  -0.09962 
+F-statistic: 0.003466 on 1 and 10 DF,  p-value: 0.9542
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>35-100 kW</strong> y el rango de temperatura <strong>0 to 15°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es prácticamente nula (-0.0186), indicando que no existe relación.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.00035</strong>, lo que significa que menos del 0.04% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.954</strong>, indicando que la temperatura no es un predictor estadísticamente significativo.</li>
+</ul>
+<p>
+En conclusión, no hay evidencia estadística para considerar que la temperatura afecta la duración de carga en este rango de tasas de carga y temperaturas.
+</p>
+
+
+
+<h3>Rango de Rate: 35-100 kW | Rango de Temperatura: 15 to 30</h3>
+<p><strong>Número de observaciones:</strong> 15</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> 0.06482792</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.4920 -0.3111 -0.1653  0.1544  1.0013 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      0.492403   0.721289   0.683    0.507
+Temperature...C. 0.007734   0.033017   0.234    0.818
+
+Residual standard error: 0.4784 on 13 degrees of freedom
+Multiple R-squared:  0.004203,	Adjusted R-squared:  -0.0724 
+F-statistic: 0.05487 on 1 and 13 DF,  p-value: 0.8185
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>35-100 kW</strong> y el rango de temperatura <strong>15 to 30°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es baja y positiva (0.065), indicando una relación muy débil.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.0042</strong>, lo que significa que menos del 0.5% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.818</strong>, indicando que la temperatura no es un predictor estadísticamente significativo.</li>
+</ul>
+<p>
+En conclusión, no hay evidencia estadística para considerar que la temperatura afecta la duración de carga en este rango de tasas de carga y temperaturas.
+</p>
+
+
+
+<h3>Rango de Rate: 35-100 kW | Rango de Temperatura: 30 and above</h3>
+<p><strong>Número de observaciones:</strong> 7</p>
+<p><strong>Correlación entre Temperatura y Duración:</strong> -0.2339005</p>
+
+<h3>Modelo de Regresión</h3>
+<pre>
+Call:
+lm(formula = Calculated.Duration..hours. ~ Temperature...C., 
+    data = cur_data())
+
+Residuals:
+      1       2       3       4       5       6       7 
+ 0.8551 -0.1155 -0.3918  0.3715  0.2192 -0.3490 -0.5894 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)       2.56465    3.20661   0.800    0.460
+Temperature...C. -0.05036    0.09362  -0.538    0.614
+
+Residual standard error: 0.5574 on 5 degrees of freedom
+Multiple R-squared:  0.05471,	Adjusted R-squared:  -0.1343 
+F-statistic: 0.2894 on 1 and 5 DF,  p-value: 0.6137
+</pre>
+
+<h3>Análisis de la Estadística</h3>
+<p>
+El análisis de esta estadística muestra que, para el rango de tasa de carga <strong>35-100 kW</strong> y el rango de temperatura <strong>30 and above°C</strong>:
+</p>
+<ul>
+  <li>La correlación entre la temperatura y la duración de carga es negativa y débil (-0.234), lo que indica una relación inversa poco significativa.</li>
+  <li>El modelo de regresión presenta un <strong>R-squared de 0.0547</strong>, lo que significa que solo el 5.47% de la variabilidad en la duración puede explicarse por la temperatura.</li>
+  <li>El p-value del coeficiente de temperatura es <strong>0.614</strong>, indicando que la temperatura no es un predictor estadísticamente significativo.</li>
+</ul>
+<p>
+En conclusión, no hay evidencia estadística para considerar que la temperatura afecta la duración de carga en este rango de tasas de carga y temperaturas.
+</p>
+
+
+
+
+<h2>Comparación de Modelos Lineales y Cuadráticos</h2>
+
+<h3>Metodología</h3>
+<p>Para determinar la relación entre temperatura y duración de carga, los datos fueron segmentados en rangos de <strong>Rate (tasa de carga)</strong> y <strong>Temperatura</strong>. Se utilizaron los siguientes métodos:</p>
+<ul>
+  <li><strong>Correlación Spearman:</strong> Evalúa relaciones monotónicas, no necesariamente lineales.</li>
+  <li><strong>Regresiones Lineales y Cuadráticas:</strong> Se ajustaron modelos para determinar la relación lineal y no lineal entre las variables.</li>
+  <li><strong>Comparación AIC:</strong> El criterio de Akaike determinó el modelo más adecuado, penalizando la complejidad.</li>
+  <li><strong>R-squared:</strong> Indicó cuánto de la variabilidad en la duración de carga explica cada modelo.</li>
+</ul>
+
+<h3>Resultados por Rango</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Rango de Rate</th>
+      <th>Rango de Temperatura</th>
+      <th>Número de Observaciones</th>
+      <th>Spearman Correlation</th>
+      <th>Linear AIC</th>
+      <th>Quadratic AIC</th>
+      <th>Mejor Modelo</th>
+      <th>Linear R-squared</th>
+      <th>Quadratic R-squared</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0-10 kW</td>
+      <td>-10 to 0</td>
+      <td>7</td>
+      <td>0.25</td>
+      <td>38.77</td>
+      <td>40.05</td>
+      <td>Linear</td>
+      <td>0.0094</td>
+      <td>0.1065</td>
+    </tr>
+    <tr>
+      <td>0-10 kW</td>
+      <td>0 to 15</td>
+      <td>7</td>
+      <td>-0.25</td>
+      <td>42.78</td>
+      <td>43.87</td>
+      <td>Linear</td>
+      <td>0.0461</td>
+      <td>0.1619</td>
+    </tr>
+    <tr>
+      <td>0-10 kW</td>
+      <td>15 to 30</td>
+      <td>7</td>
+      <td>-0.2143</td>
+      <td>47.57</td>
+      <td>48.67</td>
+      <td>Linear</td>
+      <td>0.3225</td>
+      <td>0.4041</td>
+    </tr>
+    <tr>
+      <td>0-10 kW</td>
+      <td>30 and above</td>
+      <td>6</td>
+      <td>-0.3143</td>
+      <td>33.08</td>
+      <td>34.91</td>
+      <td>Linear</td>
+      <td>0.0942</td>
+      <td>0.1191</td>
+    </tr>
+    <tr>
+      <td>10-35 kW</td>
+      <td>-10 to 0</td>
+      <td>13</td>
+      <td>0.4615</td>
+      <td>42.39</td>
+      <td>43.08</td>
+      <td>Linear</td>
+      <td>0.2497</td>
+      <td>0.3218</td>
+    </tr>
+    <tr>
+      <td>10-35 kW</td>
+      <td>0 to 15</td>
+      <td>13</td>
+      <td>0.2418</td>
+      <td>38.88</td>
+      <td>40.51</td>
+      <td>Linear</td>
+      <td>0.0536</td>
+      <td>0.0803</td>
+    </tr>
+    <tr>
+      <td>10-35 kW</td>
+      <td>15 to 30</td>
+      <td>17</td>
+      <td>-0.2745</td>
+      <td>42.54</td>
+      <td>42.08</td>
+      <td>Linear</td>
+      <td>0.0710</td>
+      <td>0.1963</td>
+    </tr>
+    <tr>
+      <td>10-35 kW</td>
+      <td>30 and above</td>
+      <td>12</td>
+      <td>-0.007</td>
+      <td>37.97</td>
+      <td>38.83</td>
+      <td>Linear</td>
+      <td>0.00003</td>
+      <td>0.0905</td>
+    </tr>
+    <tr>
+      <td>35-100 kW</td>
+      <td>-10 to 0</td>
+      <td>3</td>
+      <td>-0.5</td>
+      <td>6.04</td>
+      <td>-Inf</td>
+      <td>Quadratic</td>
+      <td>0.7375</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>35-100 kW</td>
+      <td>0 to 15</td>
+      <td>12</td>
+      <td>0.049</td>
+      <td>18.38</td>
+      <td>19.62</td>
+      <td>Linear</td>
+      <td>0.0003</td>
+      <td>0.0622</td>
+    </tr>
+    <tr>
+      <td>35-100 kW</td>
+      <td>15 to 30</td>
+      <td>15</td>
+      <td>0.2393</td>
+      <td>24.30</td>
+      <td>26.30</td>
+      <td>Linear</td>
+      <td>0.0042</td>
+      <td>0.0042</td>
+    </tr>
+    <tr>
+      <td>35-100 kW</td>
+      <td>30 and above</td>
+      <td>7</td>
+      <td>-0.5</td>
+      <td>15.33</td>
+      <td>12.23</td>
+      <td>Quadratic</td>
+      <td>0.0547</td>
+      <td>0.5436</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Análisis General</h3>
+<ul>
+  <li>La mayoría de las correlaciones Spearman son bajas, indicando relaciones débiles o inexistentes.</li>
+  <li>El modelo lineal es preferido en la mayoría de los rangos según AIC, excepto en dos casos donde el cuadrático fue mejor.</li>
+  <li>Los valores de R-squared (lineal y cuadrático) son bajos en general, sugiriendo que la temperatura no explica bien la variabilidad en la duración de carga.</li>
+</ul>
+<p>En general, no se observan relaciones estadísticamente significativas o evidentes entre la temperatura y la duración de carga en los rangos analizados.</p>
+
+
+
+
+<table>
+  <caption><h2>Tabla Ordenada con Tipo de Cargador y Tasa de Carga</h2></caption>
+   <thead>
+    <tr>
+     <th style="text-align:right;"> Energy.Consumed..kWh. </th>
+     <th style="text-align:right;"> Calculated.Duration..hours. </th>
+     <th style="text-align:right;"> Charge.Loaded </th>
+     <th style="text-align:left;"> Rate.Range </th>
+     <th style="text-align:left;"> Charger.Type </th>
+     <th style="text-align:right;"> Charging.Rate..kW. </th>
+    </tr>
+   </thead>
+  <tbody>
+    <tr>
+     <td style="text-align:right;"> 48.998475 </td>
+     <td style="text-align:right;"> 19.1329781 </td>
+     <td style="text-align:right;"> 82.4017266 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 2.560943 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 23.540384 </td>
+     <td style="text-align:right;"> 6.7101768 </td>
+     <td style="text-align:right;"> 22.1485874 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 3.508161 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 26.292224 </td>
+     <td style="text-align:right;"> 7.3169571 </td>
+     <td style="text-align:right;"> 29.1919635 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 3.593328 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 37.771615 </td>
+     <td style="text-align:right;"> 9.3617937 </td>
+     <td style="text-align:right;"> 41.0793592 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 4.034656 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 27.047103 </td>
+     <td style="text-align:right;"> 5.9817132 </td>
+     <td style="text-align:right;"> 53.5839563 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 4.521631 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 25.088369 </td>
+     <td style="text-align:right;"> 5.0590003 </td>
+     <td style="text-align:right;"> 21.7691612 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 4.959155 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 19.402524 </td>
+     <td style="text-align:right;"> 3.8721117 </td>
+     <td style="text-align:right;"> 28.3045253 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 5.010838 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 6.462699 </td>
+     <td style="text-align:right;"> 1.2113226 </td>
+     <td style="text-align:right;"> 3.7222952 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 5.335242 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 76.065039 </td>
+     <td style="text-align:right;"> 13.8543843 </td>
+     <td style="text-align:right;"> 68.7613015 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 5.490323 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 35.348377 </td>
+     <td style="text-align:right;"> 6.4303165 </td>
+     <td style="text-align:right;"> 57.7133392 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 5.497144 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 34.256453 </td>
+     <td style="text-align:right;"> 6.2017350 </td>
+     <td style="text-align:right;"> 32.4210358 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 5.523689 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 18.399710 </td>
+     <td style="text-align:right;"> 3.1163821 </td>
+     <td style="text-align:right;"> 49.2600536 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 5.904190 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 26.756920 </td>
+     <td style="text-align:right;"> 4.2884815 </td>
+     <td style="text-align:right;"> 24.2547757 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 6.239253 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 42.094233 </td>
+     <td style="text-align:right;"> 6.6710074 </td>
+     <td style="text-align:right;"> 44.1314395 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 6.310027 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 11.288429 </td>
+     <td style="text-align:right;"> 1.7818626 </td>
+     <td style="text-align:right;"> 1.6891185 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 6.335185 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 41.993262 </td>
+     <td style="text-align:right;"> 6.4771026 </td>
+     <td style="text-align:right;"> 44.7520920 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 6.483341 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 40.857276 </td>
+     <td style="text-align:right;"> 6.2868936 </td>
+     <td style="text-align:right;"> 50.6039887 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 6.498802 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 58.091052 </td>
+     <td style="text-align:right;"> 8.2169591 </td>
+     <td style="text-align:right;"> 57.1745460 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 7.069653 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 48.846651 </td>
+     <td style="text-align:right;"> 6.7430980 </td>
+     <td style="text-align:right;"> 39.3597524 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 7.243948 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 72.089243 </td>
+     <td style="text-align:right;"> 9.6188560 </td>
+     <td style="text-align:right;"> 71.3077474 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 7.494575 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 54.913206 </td>
+     <td style="text-align:right;"> 7.2250673 </td>
+     <td style="text-align:right;"> 46.0656737 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 7.600373 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 77.638517 </td>
+     <td style="text-align:right;"> 9.5549747 </td>
+     <td style="text-align:right;"> 71.4470140 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 8.125455 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 15.474096 </td>
+     <td style="text-align:right;"> 1.7965217 </td>
+     <td style="text-align:right;"> 12.5198247 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 8.613364 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 6.432324 </td>
+     <td style="text-align:right;"> 0.7126488 </td>
+     <td style="text-align:right;"> 1.7927884 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 9.025939 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 12.919880 </td>
+     <td style="text-align:right;"> 1.4140100 </td>
+     <td style="text-align:right;"> 23.0753308 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 9.137049 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 16.497212 </td>
+     <td style="text-align:right;"> 1.7265606 </td>
+     <td style="text-align:right;"> 43.4220101 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 9.554957 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 39.152310 </td>
+     <td style="text-align:right;"> 3.9396156 </td>
+     <td style="text-align:right;"> 45.4447525 </td>
+     <td style="text-align:left;"> 0-10 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 9.938104 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 37.998033 </td>
+     <td style="text-align:right;"> 3.6210951 </td>
+     <td style="text-align:right;"> 37.1630836 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 10.493520 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 30.726161 </td>
+     <td style="text-align:right;"> 2.7395451 </td>
+     <td style="text-align:right;"> 37.2657233 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 11.215789 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 24.874541 </td>
+     <td style="text-align:right;"> 2.1740805 </td>
+     <td style="text-align:right;"> 24.1895264 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 11.441408 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 26.869110 </td>
+     <td style="text-align:right;"> 2.2294618 </td>
+     <td style="text-align:right;"> 26.3825541 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 12.051837 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 13.819971 </td>
+     <td style="text-align:right;"> 1.1258782 </td>
+     <td style="text-align:right;"> 12.4843688 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 12.274836 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 13.726134 </td>
+     <td style="text-align:right;"> 1.0994973 </td>
+     <td style="text-align:right;"> 7.9184936 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 12.484008 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 35.899549 </td>
+     <td style="text-align:right;"> 2.8692331 </td>
+     <td style="text-align:right;"> 36.5918197 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 12.511897 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 28.279857 </td>
+     <td style="text-align:right;"> 2.1380442 </td>
+     <td style="text-align:right;"> 25.7844301 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 13.226975 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 12.594889 </td>
+     <td style="text-align:right;"> 0.9479241 </td>
+     <td style="text-align:right;"> 16.9251278 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 13.286812 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 29.840623 </td>
+     <td style="text-align:right;"> 2.1255368 </td>
+     <td style="text-align:right;"> 36.3941312 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 14.039099 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 9.086247 </td>
+     <td style="text-align:right;"> 0.6449303 </td>
+     <td style="text-align:right;"> 14.8061366 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 14.088726 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 41.980753 </td>
+     <td style="text-align:right;"> 2.9792899 </td>
+     <td style="text-align:right;"> 46.1059825 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 14.090859 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 34.541348 </td>
+     <td style="text-align:right;"> 2.4257259 </td>
+     <td style="text-align:right;"> 67.6385293 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 14.239592 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 43.592372 </td>
+     <td style="text-align:right;"> 3.0495003 </td>
+     <td style="text-align:right;"> 59.4952206 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 14.294923 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 33.398179 </td>
+     <td style="text-align:right;"> 2.3159519 </td>
+     <td style="text-align:right;"> 44.7951619 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 14.420929 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 59.797769 </td>
+     <td style="text-align:right;"> 4.1055996 </td>
+     <td style="text-align:right;"> 67.8373220 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 14.564929 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 6.443672 </td>
+     <td style="text-align:right;"> 0.4297954 </td>
+     <td style="text-align:right;"> 3.3290679 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 14.992418 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 48.145970 </td>
+     <td style="text-align:right;"> 3.1018566 </td>
+     <td style="text-align:right;"> 83.4476799 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 15.521662 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 45.769548 </td>
+     <td style="text-align:right;"> 2.6303542 </td>
+     <td style="text-align:right;"> 51.1042514 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 17.400527 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 68.185853 </td>
+     <td style="text-align:right;"> 3.7081689 </td>
+     <td style="text-align:right;"> 61.6400865 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 18.388012 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 20.464781 </td>
+     <td style="text-align:right;"> 1.1002872 </td>
+     <td style="text-align:right;"> 37.9806616 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 18.599491 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 37.374516 </td>
+     <td style="text-align:right;"> 1.9810722 </td>
+     <td style="text-align:right;"> 48.8879671 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 18.865802 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 10.420111 </td>
+     <td style="text-align:right;"> 0.5513373 </td>
+     <td style="text-align:right;"> 4.8019628 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 18.899703 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 10.640152 </td>
+     <td style="text-align:right;"> 0.5551241 </td>
+     <td style="text-align:right;"> 2.5815880 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 19.167161 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 17.704738 </td>
+     <td style="text-align:right;"> 0.8980940 </td>
+     <td style="text-align:right;"> 31.5652796 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 19.713680 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 37.610115 </td>
+     <td style="text-align:right;"> 1.7852054 </td>
+     <td style="text-align:right;"> 71.3023454 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 21.067669 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 27.170171 </td>
+     <td style="text-align:right;"> 1.1404229 </td>
+     <td style="text-align:right;"> 32.3921431 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 23.824644 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 25.100863 </td>
+     <td style="text-align:right;"> 1.0272669 </td>
+     <td style="text-align:right;"> 45.8268709 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 24.434608 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 27.282216 </td>
+     <td style="text-align:right;"> 1.1145604 </td>
+     <td style="text-align:right;"> 19.7138468 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 24.478005 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 22.572882 </td>
+     <td style="text-align:right;"> 0.8925060 </td>
+     <td style="text-align:right;"> 22.5943937 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 25.291576 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 40.630924 </td>
+     <td style="text-align:right;"> 1.5768470 </td>
+     <td style="text-align:right;"> 39.6174630 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 25.767194 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 17.473378 </td>
+     <td style="text-align:right;"> 0.6774561 </td>
+     <td style="text-align:right;"> 29.6100946 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 25.792635 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 28.772274 </td>
+     <td style="text-align:right;"> 1.1152566 </td>
+     <td style="text-align:right;"> 41.5110228 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 25.798793 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 43.512347 </td>
+     <td style="text-align:right;"> 1.6648918 </td>
+     <td style="text-align:right;"> 77.8023559 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 26.135240 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 45.909252 </td>
+     <td style="text-align:right;"> 1.7447929 </td>
+     <td style="text-align:right;"> 56.5723475 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 26.312150 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 40.051797 </td>
+     <td style="text-align:right;"> 1.5212614 </td>
+     <td style="text-align:right;"> 70.5516246 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 26.328017 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 20.453642 </td>
+     <td style="text-align:right;"> 0.7717003 </td>
+     <td style="text-align:right;"> 15.7004005 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 26.504643 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 20.846378 </td>
+     <td style="text-align:right;"> 0.7843526 </td>
+     <td style="text-align:right;"> 23.2025546 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 26.577815 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 51.737131 </td>
+     <td style="text-align:right;"> 1.9383049 </td>
+     <td style="text-align:right;"> 50.8063673 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 26.691947 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 55.199838 </td>
+     <td style="text-align:right;"> 2.0466866 </td>
+     <td style="text-align:right;"> 52.4246673 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 26.970343 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 79.002260 </td>
+     <td style="text-align:right;"> 2.9284584 </td>
+     <td style="text-align:right;"> 70.7640785 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 26.977423 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 49.545547 </td>
+     <td style="text-align:right;"> 1.8344996 </td>
+     <td style="text-align:right;"> 44.0522172 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 27.007663 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 41.568620 </td>
+     <td style="text-align:right;"> 1.4911502 </td>
+     <td style="text-align:right;"> 47.8332463 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 27.876883 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 46.412062 </td>
+     <td style="text-align:right;"> 1.6484294 </td>
+     <td style="text-align:right;"> 48.3082182 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 28.155322 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 45.453449 </td>
+     <td style="text-align:right;"> 1.6121650 </td>
+     <td style="text-align:right;"> 48.1223095 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 28.194042 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 29.758385 </td>
+     <td style="text-align:right;"> 1.0127050 </td>
+     <td style="text-align:right;"> 25.7344547 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 29.385047 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 6.885479 </td>
+     <td style="text-align:right;"> 0.2338290 </td>
+     <td style="text-align:right;"> 7.5924567 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 29.446643 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 19.362006 </td>
+     <td style="text-align:right;"> 0.6535424 </td>
+     <td style="text-align:right;"> 36.6867625 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 29.626243 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 21.867948 </td>
+     <td style="text-align:right;"> 0.7317595 </td>
+     <td style="text-align:right;"> 17.5363807 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 29.884066 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 31.218890 </td>
+     <td style="text-align:right;"> 1.0397316 </td>
+     <td style="text-align:right;"> 31.7541479 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 30.025913 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 55.655333 </td>
+     <td style="text-align:right;"> 1.8304767 </td>
+     <td style="text-align:right;"> 48.8039696 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 30.404830 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 25.121165 </td>
+     <td style="text-align:right;"> 0.7827456 </td>
+     <td style="text-align:right;"> 35.2590284 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 32.093652 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 21.656164 </td>
+     <td style="text-align:right;"> 0.6571533 </td>
+     <td style="text-align:right;"> 19.2908121 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 32.954511 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 47.767847 </td>
+     <td style="text-align:right;"> 1.4477588 </td>
+     <td style="text-align:right;"> 83.8799518 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 32.994341 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 16.673600 </td>
+     <td style="text-align:right;"> 0.5053398 </td>
+     <td style="text-align:right;"> 11.1802888 </td>
+     <td style="text-align:left;"> 10-35 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 32.994830 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 22.515635 </td>
+     <td style="text-align:right;"> 0.6405133 </td>
+     <td style="text-align:right;"> 18.9326073 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 35.152485 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 41.578915 </td>
+     <td style="text-align:right;"> 1.1739452 </td>
+     <td style="text-align:right;"> 44.5368682 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 35.418106 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 52.884130 </td>
+     <td style="text-align:right;"> 1.4886052 </td>
+     <td style="text-align:right;"> 45.4329102 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 35.525962 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 45.619660 </td>
+     <td style="text-align:right;"> 1.2489369 </td>
+     <td style="text-align:right;"> 38.4364882 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 36.526792 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 29.318815 </td>
+     <td style="text-align:right;"> 0.7974812 </td>
+     <td style="text-align:right;"> 26.0120906 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 36.764270 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 29.582840 </td>
+     <td style="text-align:right;"> 0.7955849 </td>
+     <td style="text-align:right;"> 55.8604372 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 37.183765 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 61.908017 </td>
+     <td style="text-align:right;"> 1.6388872 </td>
+     <td style="text-align:right;"> 69.8392868 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 37.774423 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 36.465473 </td>
+     <td style="text-align:right;"> 0.9631590 </td>
+     <td style="text-align:right;"> 61.1559438 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 37.860285 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 71.708507 </td>
+     <td style="text-align:right;"> 1.8483443 </td>
+     <td style="text-align:right;"> 65.1899241 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 38.796077 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 5.755525 </td>
+     <td style="text-align:right;"> 0.1470984 </td>
+     <td style="text-align:right;"> 10.1917817 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 39.127025 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 31.102262 </td>
+     <td style="text-align:right;"> 0.7747745 </td>
+     <td style="text-align:right;"> 43.9133766 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 40.143630 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 57.859670 </td>
+     <td style="text-align:right;"> 1.4401912 </td>
+     <td style="text-align:right;"> 52.6292740 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 40.174993 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 8.383691 </td>
+     <td style="text-align:right;"> 0.2086643 </td>
+     <td style="text-align:right;"> 0.4875268 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 40.177885 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 15.898734 </td>
+     <td style="text-align:right;"> 0.3930998 </td>
+     <td style="text-align:right;"> 14.5097215 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 40.444522 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 30.900798 </td>
+     <td style="text-align:right;"> 0.7617713 </td>
+     <td style="text-align:right;"> 36.4445130 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 40.564404 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 71.280004 </td>
+     <td style="text-align:right;"> 1.7549563 </td>
+     <td style="text-align:right;"> 63.7679906 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 40.616399 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 20.790436 </td>
+     <td style="text-align:right;"> 0.5041669 </td>
+     <td style="text-align:right;"> 13.1442000 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 41.237211 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 14.492160 </td>
+     <td style="text-align:right;"> 0.3502391 </td>
+     <td style="text-align:right;"> 8.9745560 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 41.377911 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 44.870056 </td>
+     <td style="text-align:right;"> 1.0833086 </td>
+     <td style="text-align:right;"> 41.7135235 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 41.419459 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 20.026314 </td>
+     <td style="text-align:right;"> 0.4811954 </td>
+     <td style="text-align:right;"> 15.5206698 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 41.617842 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 47.232071 </td>
+     <td style="text-align:right;"> 1.0994351 </td>
+     <td style="text-align:right;"> 55.6267487 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 42.960307 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 19.958025 </td>
+     <td style="text-align:right;"> 0.4640575 </td>
+     <td style="text-align:right;"> 37.5546902 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 43.007658 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 32.832957 </td>
+     <td style="text-align:right;"> 0.7379458 </td>
+     <td style="text-align:right;"> 37.0559049 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 44.492366 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 37.688028 </td>
+     <td style="text-align:right;"> 0.8307821 </td>
+     <td style="text-align:right;"> 49.4869447 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 45.364515 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 41.157014 </td>
+     <td style="text-align:right;"> 0.8922023 </td>
+     <td style="text-align:right;"> 45.9842637 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 46.129689 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 26.992344 </td>
+     <td style="text-align:right;"> 0.5794665 </td>
+     <td style="text-align:right;"> 32.4104523 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 46.581371 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 13.876558 </td>
+     <td style="text-align:right;"> 0.2967659 </td>
+     <td style="text-align:right;"> 8.0634869 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 46.759271 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 65.102919 </td>
+     <td style="text-align:right;"> 1.3723284 </td>
+     <td style="text-align:right;"> 82.4178255 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 47.439752 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 19.721540 </td>
+     <td style="text-align:right;"> 0.4142387 </td>
+     <td style="text-align:right;"> 25.8627723 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 47.609116 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 17.218744 </td>
+     <td style="text-align:right;"> 0.3606312 </td>
+     <td style="text-align:right;"> 22.5294952 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 47.746137 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 10.386094 </td>
+     <td style="text-align:right;"> 0.2174347 </td>
+     <td style="text-align:right;"> 16.6266190 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 47.766494 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 47.377439 </td>
+     <td style="text-align:right;"> 0.9837440 </td>
+     <td style="text-align:right;"> 44.4214078 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 48.160335 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 60.831104 </td>
+     <td style="text-align:right;"> 1.2588896 </td>
+     <td style="text-align:right;"> 57.4486201 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 48.321236 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 17.854873 </td>
+     <td style="text-align:right;"> 0.3690192 </td>
+     <td style="text-align:right;"> 14.6340642 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 2 </td>
+     <td style="text-align:right;"> 48.384677 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 24.726938 </td>
+     <td style="text-align:right;"> 0.5005175 </td>
+     <td style="text-align:right;"> 22.3502585 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 49.402739 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 23.571282 </td>
+     <td style="text-align:right;"> 0.4734737 </td>
+     <td style="text-align:right;"> 27.9309072 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> DC Fast Charger </td>
+     <td style="text-align:right;"> 49.783719 </td>
+    </tr>
+    <tr>
+     <td style="text-align:right;"> 13.280712 </td>
+     <td style="text-align:right;"> 0.2245315 </td>
+     <td style="text-align:right;"> 5.0237976 </td>
+     <td style="text-align:left;"> 35-100 kW </td>
+     <td style="text-align:left;"> Level 1 </td>
+     <td style="text-align:right;"> 59.148545 </td>
+    </tr>
+  </tbody>
+  </table>
+  
