@@ -1,0 +1,45 @@
+---
+title: "Describe variables"
+author: "José Manuel Rodríguez Vélez"
+output: pdf_document
+---
+
+## Descripción de las variables utilizadas para la optimización de anuncios en estaciones de carga de vehículos eléctricos
+
+### Optimización a nivel de ciudad
+
+En este proyecto, se ha decidido realizar la optimización de anuncios a nivel de **ciudad**, en lugar de hacerlo a nivel de estación individual. Esto se debe a que el volumen de datos por estación es limitado, lo que dificulta la extracción de patrones claros. A nivel de ciudad, contamos con una mayor cantidad de datos, lo que permite identificar tendencias y patrones de comportamiento de los usuarios de manera más efectiva. Por lo tanto, los anuncios se programarán considerando el contexto urbano, adaptando el contenido a los servicios relevantes en cada ciudad.
+
+El principal caso de uso en este análisis es la **visualización de anuncios de hoteles**, orientada a maximizar su efectividad. Este enfoque ficticio supone que las estaciones de carga pertenecen a una misma red empresarial y se desea mostrar anuncios de hoteles en el momento óptimo, especialmente para **usuarios de larga distancia** que están buscando alojamiento al finalizar su jornada de viaje. Se procederá con otros casos dependiendo del tiempo y del alcance del proyecto.
+
+-   **Time of Day**\
+    **Tipo de dato**: Cualitativo Categórico\
+    **Descripción**: Indica el momento del día en el que ocurre la carga (por ejemplo, Mañana, Tarde, Noche). Esta variable permite identificar los horarios de mayor uso en las estaciones, lo cual es clave para programar anuncios en horas pico y maximizar su visibilidad.
+
+-   **Charging Start Time**\
+    **Tipo de dato**: Cualitativo (Fecha/Tiempo)\
+    **Descripción**: Marca de tiempo que indica el momento en que comienza la sesión de carga. Este dato es relevante para entender en qué horas específicas se inician más sesiones de carga y así orientar los anuncios hacia momentos de mayor tráfico.
+
+-   **Charging End Time**\
+    **Tipo de dato**: Cualitativo (Fecha/Tiempo)\
+    **Descripción**: Marca de tiempo que indica el momento en que finaliza la sesión de carga. Ayuda a confirmar los momentos del día en que los usuarios concluyen sus sesiones.
+
+-   **Charging Duration (hours)**\
+    **Tipo de dato**: Cuantitativo Continuo\
+    **Descripción**: Duración total de la carga, medida en horas. Con esta variable se puede conocer cuánto tiempo el usuario permanece en la estación, lo que permite ajustar el tiempo de exposición de los anuncios en función del tiempo promedio de permanencia.
+
+-   **Charging Station Location**\
+    **Tipo de dato**: Cualitativo Categórico\
+    **Descripción**: Ubicación geográfica de la estación de carga (por ejemplo, Nueva York, Los Ángeles). Permite analizar el comportamiento de los usuarios en diferentes ciudades y orientar los anuncios según la ubicación, enfocándose en zonas de alto tráfico.
+
+-   **Vehicle Model**\
+    **Tipo de dato**: Cualitativo Categórico\
+    **Descripción**: Modelo del vehículo eléctrico que se está cargando (por ejemplo, Tesla Model 3, Nissan Leaf). Esta variable facilita la personalización de los anuncios, ya que se pueden dirigir servicios específicos o productos de mantenimiento a propietarios de modelos específicos.
+
+-   **User Type**\
+    **Tipo de dato**: Cualitativo Categórico\
+    **Descripción**: Clasificación del usuario según sus hábitos de conducción (por ejemplo, "Commuter" o "Long-Distance Traveler"). Esta variable permite segmentar los anuncios de acuerdo con el perfil del usuario, mostrando anuncios de hoteles, restaurantes u otros servicios relevantes para los viajeros frecuentes o servicios locales para usuarios recurrentes.
+
+-   **Day of Week**\
+    **Tipo de dato**: Cualitativo Categórico\
+    **Descripción**: Día de la semana en el que ocurre la carga (por ejemplo, Lunes, Martes). Ayuda a identificar patrones de uso según el día de la semana, permitiendo ajustar la programación de anuncios para días de mayor tráfico.

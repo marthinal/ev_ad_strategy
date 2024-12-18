@@ -1,0 +1,189 @@
+---
+title: "Regression"
+author: "José Manuel Rodríguez Vélez"
+date: "2024-12-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Pregunta que se puede responder con el modelo de regresión
+
+¿Cuánto tiempo se estima que tardará en cargar **un porcentaje determinado** de la batería, considerando **diferentes potencias de carga** (tasa de carga)?
+
+### Descripción del problema, indicando la relación conceptual entre las variables independientes seleccionadas y la variable dependiente
+
+Dependiendo de la **potencia del cargador** donde el usuario conecte su vehículo, es posible estimar cuánto tiempo tardará en cargar un **porcentaje determinado de la batería**. Por ejemplo, si el usuario desea cargar un **20%**, se puede proporcionar una aproximación del tiempo necesario.
+
+#### **Variables del modelo**
+
+-   **Variable dependiente**:
+    -   **Tiempo de carga**: representa el tiempo necesario para completar la carga.
+-   **Variables independientes**:
+    -   **Potencia del cargador**: tasa de carga en kilovatios (kW).
+    -   **Carga realizada**: diferencia entre el estado de carga inicial (**estado de carga - inicio**) y el estado de carga final (**estado de carga - fin**).
+    -   **Capacidad de la batería**: tamaño total de la batería en kilovatios-hora (kWh).
+
+#### **Relación conceptual**
+
+-   La variable **tiempo de carga** depende directamente de la **potencia del cargador** y de la **cantidad de carga realizada**:
+    -   A mayor **potencia del cargador**, menor será el tiempo de carga.
+    -   A mayor **cantidad de carga realizada**, mayor será el tiempo requerido.
+    -   La **capacidad de la batería** se utiliza para estimar la energía consumida y validar los datos.
+
+------------------------------------------------------------------------
+
+## Motivo de la selección y creación de variables
+
+En este análisis, seguí una metodología fundamentada para establecer la relación conceptual entre las variables seleccionadas. A continuación, explico las decisiones adoptadas:
+
+### 1. Selección de datos limpios basada en principios físicos
+
+Para asegurar que los datos utilizados fueran consistentes y confiables, decidí basar la limpieza en principios físicos lógicos:
+
+-   Tomé como **source of truth** el porcentaje de carga inicial (**inicio**) y el porcentaje de carga final (**fin**) de la batería.
+-   Sabiendo el tamaño de la batería, estimé la cantidad de kilovatios consumidos de forma teórica.
+-   Comparé estos valores teóricos con los datos reales de energía consumida y **excluí los registros** donde la diferencia superaba los **10 kWh**, ya que físicamente no tendría sentido.
+
+Soy consciente de que esta **source of truth** podría tener algún tipo de error. Sin embargo, para poder avanzar con el análisis y realizar la regresión, tomé esta decisión como un punto de partida válido.
+
+### 2. Exclusión de la temperatura y tipo de cargador
+
+**Temperatura:**
+
+No encontré una relación estadísticamente significativa entre la temperatura y el tiempo de carga estimado. El número de observaciones es bajo en cada rango y, visualmente, incluso en el propio *dataset* se puede ver que no hay un patrón definido que confirme una relación. De todas formas, he procedido a realizar algunos análisis estadísticos que confirman esto. Han sido añadidos a `regression_summary_statistics.html`, el cual ha sido adjuntado en la entrega de esta actividad. Estos cálculos y análisis incluyen lo siguiente:
+
+1.  **Segmentación por rangos de temperatura y tasa de carga (Rate):**
+    -   Divido los datos en subgrupos específicos basados en rangos de temperatura y tasa de carga para analizar las relaciones de manera más precisa.
+2.  **Correlación lineal (Pearson) y monotónica (Spearman):**
+    -   Evalúo tanto las relaciones lineales como las monotónicas entre la temperatura y la duración de carga para identificar posibles patrones.
+3.  **Regresión lineal:**
+    -   Modelo la relación directa entre la temperatura y la duración de carga utilizando una regresión lineal simple.
+4.  **Regresión cuadrática:**
+    -   Incluyo un término cuadrático para evaluar relaciones no lineales entre temperatura y duración.
+5.  **Comparación de modelos (AIC):**
+    -   Comparo el ajuste de los modelos lineal y cuadrático utilizando el criterio de Akaike (AIC) para determinar cuál ofrece un mejor ajuste a los datos.
+6.  **Análisis detallado de R-squared:**
+    -   Mido cuánto de la variabilidad en la duración de carga puede ser explicada por cada modelo a través del coeficiente de determinación (R-squared).
+
+### Resumen de Conclusiones
+
+1.  **Relaciones débiles o inexistentes:**
+    -   Las correlaciones Spearman son bajas en la mayoría de los rangos, indicando que no hay una relación monotónica significativa entre la temperatura y la duración de carga.
+2.  **Preferencia por modelos lineales:**
+    -   Según el AIC, los modelos lineales son preferidos en la mayoría de los casos. Sin embargo, los valores de R-squared indican que estos modelos explican muy poco de la variabilidad en la duración de carga.
+3.  **Modelos cuadráticos no aportan mucho:**
+    -   Aunque en dos casos el modelo cuadrático es preferido, el incremento en R-squared es marginal y no sugiere una relación significativa no lineal.
+4.  **Temperatura no es un predictor adecuado:**
+    -   En general, los resultados indican que la temperatura no explica significativamente la duración de carga, ni en modelos lineales ni no lineales.
+5.  **Decisión de exclusión:**
+    -   Dado que no hay evidencia estadística de una relación, la temperatura puede ser excluida como variable en los modelos de regresión, simplificando el análisis sin perder precisión.
+
+**Tipo de cargador:**
+
+Exporté una **tabla resumen** donde, incluso después de filtrar los datos, se puede observar claramente que **no existe consistencia entre la tasa de carga (rate) y el tipo de cargador** asignado. Esto no tiene sentido, ya que el tipo de cargador debería depender directamente de la tasa de carga.
+
+Por esta razón:
+
+-   **No contemplaré la variable tipo de cargador**, ya que teniendo la tasa de carga (**rate**) se puede deducir de manera más precisa el tipo de cargador.
+-   La **source of truth** en este caso será la **tasa de carga** (**Charging.Rate..kW.**) como métrica principal.
+
+### 3. Tiempo estimado de carga
+
+Para calcular el **tiempo estimado de carga**, se utiliza la siguiente fórmula basada en la física eléctrica:
+
+$$
+\text{Tiempo de carga (horas)} = \frac{\text{Energía consumida (kWh)}}{\text{Potencia del cargador (kW)}}
+$$
+
+-   La **energía consumida** se calcula en función de la **carga realizada** y la **capacidad de la batería**:
+
+$$
+\text{Energía consumida (kWh)} = \left( \frac{\text{Carga realizada (\%)}}{100} \right) \times \text{Capacidad de la batería (kWh)}
+$$
+
+#### **Motivo de la selección de esta fórmula**
+
+Esta fórmula se fundamenta en principios físicos lógicos de la relación entre **energía**, **potencia** y **tiempo**. La **potencia del cargador** (kW) determina la cantidad de energía transferida por unidad de tiempo, mientras que la **carga realizada** representa el porcentaje de batería que se desea cargar.
+
+### 4. Reconocimiento de las limitaciones del dataset
+
+Durante el proceso de limpieza y filtrado de datos, observé **limitaciones importantes** en el dataset original. La cantidad de observaciones se **redujo drásticamente** después de eliminar datos inconsistentes.
+
+## **Análisis bivariado**
+
+A continuación, se presenta el **análisis bivariado** realizado entre la **potencia del cargador (kW)** y el **tiempo de carga estimado (horas)**, segmentado por **rangos de potencia**.
+
+### **Resultados del análisis**
+
+| **Rango de Potencia** | **Correlación** | **R² (R-Squared)** | **Intercepto** | **Pendiente (Slope)** |
+|---------------|---------------|---------------|---------------|---------------|
+| **35-100 kW** | -0.5224 | 0.2729 | 16.2483 | -1.3482 |
+| **10-35 kW** | -0.5544 | 0.3073 | 4.7014 | -0.1098 |
+| **0-10 kW** | -0.2739 | 0.0750 | 2.2417 | -0.0293 |
+
+------------------------------------------------------------------------
+
+## Interpretación de los resultados
+
+1.  **Relación entre las variables**:\
+    Existe una relación lineal negativa entre la potencia del cargador y el tiempo de carga estimado. En otras palabras, a mayor potencia, menor será el tiempo de carga.
+
+De forma general, el modelo lineal que se ajusta es:
+
+$$
+   \text{Tiempo_de_carga} = \beta_0 + \beta_1 \times \text{Potencia} + \epsilon
+   $$
+
+Donde:
+
+-   $\text{Tiempo_de_carga}$ es la variable **dependiente** (en horas).
+-   $\text{Potencia}$ es la variable **independiente** (en kW).
+-   $\beta_0$ es el **intercepto** del modelo.
+-   $\beta_1$ es el **coeficiente de la pendiente**, que indica el cambio en el tiempo de carga ante un incremento de 1 kW en la potencia.
+-   $\epsilon$ representa el **término de error residual**.
+
+2.  **Segmentación por rangos de potencia**:
+    -   **35-100 kW**:\
+        La pendiente es de aproximadamente **-1.35 horas/kW**, lo que indica que un aumento de 1 kW en este rango reduce el tiempo de carga estimado en cerca de 1.35 horas.\
+        El coeficiente de determinación (R² = 0.2729) sugiere que el modelo explica alrededor del 27% de la variabilidad en el tiempo de carga para este rango de potencia.
+
+    -   **10-35 kW**:\
+        La pendiente es de aproximadamente **-0.11 horas/kW**, menor en magnitud que en el rango anterior, pero con un R² = 0.3073, lo cual es ligeramente mayor que en el rango de 35-100 kW. Esto indica que en el rango medio (10-35 kW) el modelo explica ligeramente más variabilidad, aunque la reducción del tiempo al aumentar la potencia sea más moderada.
+
+    -   **0-10 kW**:\
+        En este rango, la relación es mucho más débil (R² = 0.0750), lo que indica una mayor dispersión de los datos y poca capacidad predictiva del modelo. La pendiente es de -0.0293 horas/kW, mostrando una relación negativa muy leve.
+
+**L**os resultados confirman una relación negativa entre la potencia y el tiempo de carga, siendo más pronunciada (en términos de pendiente) en el rango de mayor potencia, pero con una mayor capacidad explicativa del modelo en el rango intermedio (10-35 kW). En el rango más bajo (0-10 kW), la relación es más débil y el modelo menos confiable.
+
+Este gráfico con faceta para filtrar por Rate muestra lo que nos dice el análisis estadístico:
+
+```{r, echo=FALSE, results='asis'}
+# Leer el contenido del HTML interactivo
+interactive_plot <- paste(readLines("/Users/marthinal/ev_ad_strategy/html_report/regression_interactive_plot.html"), collapse = "\n")
+
+# Crear un iframe con srcdoc
+htmltools::tags$iframe(
+  srcdoc = interactive_plot,
+  width = "100%",
+  height = "600px",
+  style = "border:none;"
+)
+```
+
+### **Conclusión**
+
+El modelo de regresión proporciona la capacidad de ofrecer estimaciones de tiempo de carga más precisas en función de la potencia del cargador, lo que se traduce en una mejor experiencia de usuario.
+
+-   **Cargadores de alta potencia (35-100 kW)**:\
+    La mayor precisión en este rango permite a la compañía comunicar tiempos de carga más confiables, promoviendo su uso como la opción más eficiente y reduciendo la incertidumbre del cliente.
+
+-   **Cargadores de potencia media (10-35 kW)**:\
+    Aunque el impacto es menor, las predicciones siguen siendo útiles para orientar a los clientes que desean un equilibrio entre potencia y tiempo.
+
+-   **Cargadores de baja potencia (0-10 kW)**:\
+    Aquí la variabilidad es mayor. Sin embargo, al informar adecuadamente sobre las limitaciones, podemos gestionar las expectativas y guiar a los clientes hacia cargadores más adecuados, maximizando la satisfacción.
+
+El modelo no solo ayuda a estimar los tiempos de carga, sino que respalda la toma de decisiones comerciales: la comunicación de ventajas, la optimización de la infraestructura disponible y la mejora de la experiencia del cliente.
