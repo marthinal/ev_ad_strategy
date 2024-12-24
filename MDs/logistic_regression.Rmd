@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introducción
 
-Mi objetivo ha sido ajustar un modelo de regresión logística que permita predecir la acción comercial que se debe tomar dependiendo del porcentaje de carga que un usuario planea cargar en una estación con tasas de carga rápidas (35-100 kW) bsándome en datos historicos del dataset..\
+Mi objetivo ha sido ajustar un modelo de regresión logística que permita predecir la acción comercial que se debe tomar dependiendo del porcentaje de carga que un usuario planea cargar en una estación con tasas de carga rápidas (35-100 kW) basándome en datos historicos del dataset.\
 Las acciones comerciales se han definido como:\
 - **Acción comercial 1**: Duración de carga estimada menor o igual a 60 minutos.\
 - **Acción comercial 2**: Duración de carga estimada mayor a 60 minutos.
@@ -50,7 +50,7 @@ Todo el proceso se explicó en la entrega anterior de regresión lineal.
 He utilizado la función `glm()` en R para ajustar el modelo de regresión logística.\
 El modelo ajustado es:
 
-```r
+``` r
 glm(Action.Commercial ~ Charge.Loaded,
     family = "binomial",
     data = datos_segmento)
@@ -58,10 +58,10 @@ glm(Action.Commercial ~ Charge.Loaded,
 
 ## Resumen del modelo logístico
 
-| Coeficiente   | Estimate | Std. Error | z value | Pr(\>    |
-|---------------|----------|------------|---------|----------|
-| (Intercept)   | -6.19346 | 2.07953    | -2.978  | 0.00290  |
-| Charge.Loaded | 0.12573  | 0.04371    | 2.877   | 0.00402  |
+| Coeficiente   | Estimate | Std. Error | z value | Pr(>\|z\|)   |
+|---------------|----------|------------|---------|---------|
+| (Intercept)   | -6.19346 | 2.07953    | -2.978  | 0.00290 |
+| Charge.Loaded | 0.12573  | 0.04371    | 2.877   | 0.00402 |
 
 -   **Dispersion parameter for binomial family taken to be 1**\
 -   **Null deviance:** 45.033 on 36 degrees of freedom\
