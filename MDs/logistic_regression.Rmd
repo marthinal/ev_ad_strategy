@@ -1,0 +1,89 @@
+---
+title: "Análisis de Regresión Logística"
+author: "José Manuel Rodríguez Vélez"
+date: "`r Sys.Date()`"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Análisis de regresión logística para acciones comerciales en estaciones de carga
+
+## Introducción
+
+Mi objetivo ha sido ajustar un modelo de regresión logística que permita predecir la acción comercial que se debe tomar dependiendo del porcentaje de carga que un usuario planea cargar en una estación con tasas de carga rápidas (35-100 kW) bsándome en datos historicos del dataset..\
+Las acciones comerciales se han definido como:\
+- **Acción comercial 1**: Duración de carga estimada menor o igual a 60 minutos.\
+- **Acción comercial 2**: Duración de carga estimada mayor a 60 minutos.
+
+## Selección de la variable dependiente
+
+He creado una variable dependiente binaria llamada `Action.Commercial`.\
+Esta variable toma los siguientes valores:\
+- `0`: Acción comercial 1 (tiempo estimado ≤ 60 minutos).\
+- `1`: Acción comercial 2 (tiempo estimado \> 60 minutos).
+
+Esta variable fue generada a partir de la duración estimada de carga calculada en el dataset original.
+
+## Selección de la variable independiente
+
+Como variable independiente se utilizó `Charge.Loaded`, que representa el porcentaje de carga realizada por un usuario.
+
+## Preparación de los datos
+
+El dataset original fue filtrado y preprocesado para incluir únicamente datos válidos según las siguientes condiciones:
+
+1.  Las tasas de carga (`Charging.Rate..kW.`) están en el rango de 35-100 kW.
+2.  Los valores de energía consumida y duración estimada son consistentes con las características de la batería.
+3.  La carga realizada no excede el 100%.
+
+El filtrado aseguró la calidad de los datos y permitió una base sólida para el ajuste del modelo.\
+Todo el proceso se explicó en la entrega anterior de regresión lineal.
+
+## Ajuste del modelo
+
+He utilizado la función `glm()` en R para ajustar el modelo de regresión logística.\
+El modelo ajustado es:
+
+```r
+glm(Action.Commercial ~ Charge.Loaded,
+    family = "binomial",
+    data = datos_segmento)
+```
+
+## Resumen del modelo logístico
+
+| Coeficiente   | Estimate | Std. Error | z value | Pr(\>    |
+|---------------|----------|------------|---------|----------|
+| (Intercept)   | -6.19346 | 2.07953    | -2.978  | 0.00290  |
+| Charge.Loaded | 0.12573  | 0.04371    | 2.877   | 0.00402  |
+
+-   **Dispersion parameter for binomial family taken to be 1**\
+-   **Null deviance:** 45.033 on 36 degrees of freedom\
+-   **Residual deviance:** 24.813 on 35 degrees of freedom\
+-   **AIC:** 28.813\
+-   **Number of Fisher Scoring iterations:** 6
+
+## Interpretación de los resultados
+
+1.  **Intercepto**: El intercepto tiene un valor de -6.19346. Esto representa el logaritmo de las probabilidades de que un usuario tome la Acción comercial 2 cuando `Charge.Loaded` es 0.
+2.  **Carga realizada (`Charge.Loaded`)**: Por cada unidad adicional en `Charge.Loaded`, las probabilidades logarítmicas de que se tome la Acción comercial 2 aumentan en 0.12573. Este coeficiente es estadísticamente significativo (`p = 0.00402`).
+
+El modelo muestra un ajuste razonable, con un AIC de 28.813 y una reducción significativa en la desviación residual.
+
+## Visualización de los resultados
+
+La probabilidad predicha de tomar cada acción comercial se representa gráficamente:
+
+![Modelo de Regresión Logística](~/ev_ad_strategy/html_report/logistic_regression_plot.png)
+
+El gráfico muestra una relación positiva entre la carga realizada y la probabilidad de tomar la Acción comercial 2.\
+A medida que aumenta el porcentaje de carga, también aumenta la probabilidad de que la duración de carga sea mayor a 60 minutos.
+
+El modelo logístico ajustado permite predecir de manera eficaz la acción comercial basada en la carga realizada.
+Este enfoque puede ser utilizado para optimizar decisiones comerciales en **estaciones de carga rápida**, basándose en datos históricos y características de uso.
