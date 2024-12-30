@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introducción
 
-Mi objetivo ha sido ajustar un modelo de regresión logística que permita predecir la acción comercial que se debe tomar dependiendo del porcentaje de carga que un usuario planea cargar en una estación con tasas de carga rápidas (35-100 kW) basándome en datos historicos del dataset.\
+Mi objetivo ha sido ajustar un modelo de regresión logística que permita predecir la acción comercial que se debe tomar dependiendo del porcentaje de carga que un usuario planea cargar en una estación con tasas de carga rápidas (35-100 kW) basándome en datos históricos del dataset.\
 Las acciones comerciales se han definido como:\
 - **Acción comercial 1**: Duración de carga estimada menor o igual a 60 minutos.\
 - **Acción comercial 2**: Duración de carga estimada mayor a 60 minutos.
@@ -43,7 +43,7 @@ El dataset original fue filtrado y preprocesado para incluir únicamente datos v
 3.  La carga realizada no excede el 100%.
 
 El filtrado aseguró la calidad de los datos y permitió una base sólida para el ajuste del modelo.\
-Todo el proceso se explicó en la entrega anterior de regresión lineal.
+Todo el proceso se ha detallado en la entrega anterior de regresión lineal.
 
 ## Ajuste del modelo
 
@@ -56,12 +56,16 @@ glm(Action.Commercial ~ Charge.Loaded,
     data = datos_segmento)
 ```
 
+Ver el script completo en <https://github.com/marthinal/ev_ad_strategy/blob/main/scripts/logistic_regression.R>
+
+He elegido 0.6 para priorizar decisiones conservadoras, lo que permite reducir falsos positivos y minimizar el riesgo de decisiones comerciales erróneas.
+
 ## Resumen del modelo logístico
 
-| Coeficiente   | Estimate | Std. Error | z value | Pr(>\|z\|)   |
-|---------------|----------|------------|---------|---------|
-| (Intercept)   | -6.19346 | 2.07953    | -2.978  | 0.00290 |
-| Charge.Loaded | 0.12573  | 0.04371    | 2.877   | 0.00402 |
+| Coeficiente   | Estimate | Std. Error | z value | Pr(\>\|z\|) |
+|---------------|----------|------------|---------|-------------|
+| (Intercept)   | -6.19346 | 2.07953    | -2.978  | 0.00290     |
+| Charge.Loaded | 0.12573  | 0.04371    | 2.877   | 0.00402     |
 
 -   **Dispersion parameter for binomial family taken to be 1**\
 -   **Null deviance:** 45.033 on 36 degrees of freedom\
@@ -80,10 +84,12 @@ El modelo muestra un ajuste razonable, con un AIC de 28.813 y una reducción sig
 
 La probabilidad predicha de tomar cada acción comercial se representa gráficamente:
 
-![Modelo de Regresión Logística](~/ev_ad_strategy/html_report/logistic_regression_plot.png)
+![Modelo de Regresión Logística](/Users/marthinal/ev_ad_strategy/html_report/logistic_regression_plot.png)
 
 El gráfico muestra una relación positiva entre la carga realizada y la probabilidad de tomar la Acción comercial 2.\
 A medida que aumenta el porcentaje de carga, también aumenta la probabilidad de que la duración de carga sea mayor a 60 minutos.
 
 El modelo logístico ajustado permite predecir de manera eficaz la acción comercial basada en la carga realizada.
 Este enfoque puede ser utilizado para optimizar decisiones comerciales en **estaciones de carga rápida**, basándose en datos históricos y características de uso.
+
+He considerado otras posibilidades, como utilizar variables como user-type para la regresión logística. Sin embargo, tras analizar los datos en la actividad anterior, identifiqué varias inconsistencias en esas variables. Por este motivo, he preferido trabajar con datos y variables que considero más fiables para garantizar la calidad y precisión en la ejecución de esta actividad.
