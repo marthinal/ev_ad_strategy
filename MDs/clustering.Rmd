@@ -29,7 +29,7 @@ Ambas variables son esenciales para segmentar los usuarios y responder a pregunt
 
 ## Metodología
 
-1. **preprocesamiento de datos:**
+1. **Preprocesamiento de datos:**
    - Filtré los datos para eliminar valores inconsistentes, como NA o cargas negativas.
    - Calculé `Estimated.Start.Time` para determinar cuándo comienzan las cargas. Dado que el dataset incluye solo la hora de finalización (`Charging.End.Time`), esta variable se obtuvo restando la duración estimada de la carga (`Calculated.Duration..hours.`).
 
@@ -61,10 +61,12 @@ Este gráfico muestra las frecuencias de las horas estimadas de inicio, agrupada
 ### Interpretación de los resultados
 
 1. **Cluster 1 (cargas menores):**
-   - Los usuarios con cargas menores suelen comenzar entre **12 PM y 8 PM**, destacándose los intervalos **(12,14] y (18,20]**.
+   - Los usuarios con cargas menores suelen comenzar entre **12 PM y 8 PM**, destacándose los intervalos **(12,14] y (18,20]** con 9 registros cada uno.
+   - También hay actividad significativa entre **4 PM y 10 PM**, especialmente en los intervalos **(16,18] y (20,22]**.
 
 2. **Cluster 2 (cargas mayores):**
-   - Los usuarios con cargas mayores tienden a iniciar sus sesiones en la madrugada, especialmente entre **12 AM y 2 AM**.
+   - Los usuarios con cargas mayores tienden a iniciar sus sesiones principalmente entre **12 AM y 2 AM**, con 22 registros.
+   - Existe actividad secundaria entre **6 AM y 8 AM** (12 registros) y en el intervalo **2 AM a 4 AM** (8 registros).
 
 Para calcular la **hora estimada de inicio**, resté la duración de carga (`Calculated.Duration..hours.`) a la hora de finalización (`Charging.End.Time`). Este ajuste fue necesario porque la información de inicio no estaba explícita en el dataset. Este razonamiento es fundamental para identificar los momentos en que los usuarios inician sus cargas y no solo cuando terminan.
 
