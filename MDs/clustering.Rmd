@@ -1,0 +1,81 @@
+---
+title: "Análisis de Conglomerados"
+author: "José Manuel Rodríguez Vélez"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+En esta actividad final de analítica avanzada, mi objetivo es realizar un ejercicio de **segmentación o clustering** para identificar patrones en los datos de carga de vehículos eléctricos. Para ello, seleccioné variables relevantes, apliqué el algoritmo de clustering, interpreté los resultados y razoné las implicaciones comerciales basándome en los patrones encontrados.
+
+El análisis se enfoca en encontrar momentos clave para mostrar anuncios en función de los patrones de carga detectados. Específicamente, utilicé las horas de finalización de carga para calcular la hora estimada de inicio, dado que es más relevante para la toma de decisiones.
+
+---
+
+## Selección de variables
+
+Para este análisis seleccioné las siguientes variables:
+
+- **`Charge.Loaded` (carga realizada):** Representa la cantidad de energía cargada durante una sesión en kWh. Es crucial para distinguir entre usuarios con cargas grandes y pequeñas.
+- **`Estimated.Start.Time` (hora estimada de inicio):** Calculada como la hora de finalización menos la duración de la carga (`Calculated.Duration..hours.`). Esta variable es clave para determinar en qué momento los usuarios suelen comenzar sus cargas.
+
+Ambas variables son esenciales para segmentar los usuarios y responder a preguntas comerciales, como identificar los mejores momentos para mostrar anuncios. La selección cumple con el requisito de trabajar con menos de 6 variables.
+
+---
+
+## Metodología
+
+1. **preprocesamiento de datos:**
+   - Filtré los datos para eliminar valores inconsistentes, como NA o cargas negativas.
+   - Calculé `Estimated.Start.Time` para determinar cuándo comienzan las cargas. Dado que el dataset incluye solo la hora de finalización (`Charging.End.Time`), esta variable se obtuvo restando la duración estimada de la carga (`Calculated.Duration..hours.`).
+
+2. **Normalización:**
+   - Escalé las variables `Charge.Loaded` y `Estimated.Start.Time` para que tuvieran un rango similar, evitando que una de ellas dominara el clustering.
+
+3. **Aplicación del algoritmo:**
+   - Utilicé el algoritmo de **K-Means clustering** con 2 clusters. Este número fue suficiente para segmentar usuarios con patrones distintos de carga.
+
+4. **Análisis de frecuencias:**
+   - Agrupé las horas estimadas de inicio en intervalos de 2 horas para identificar los momentos más frecuentes en cada cluster.
+
+---
+
+## Resultados
+
+### Visualización del clustering
+
+El gráfico a continuación muestra los resultados del clustering aplicado. Los puntos están coloreados según el cluster al que pertenecen. Esto permite visualizar cómo se agrupan los datos en función de la carga realizada y la hora estimada de inicio:
+
+![Gráfico de clustering](../images/clustering_plot.png)
+
+### Frecuencia de horas agrupadas
+
+Este gráfico muestra las frecuencias de las horas estimadas de inicio, agrupadas en intervalos de 2 horas. Es una forma de identificar momentos clave en cada cluster:
+
+![Gráfico de frecuencias por hora](../images/clustering_bar_chart.png)
+
+### Interpretación de los resultados
+
+1. **Cluster 1 (cargas menores):**
+   - Los usuarios con cargas menores suelen comenzar entre **12 PM y 8 PM**, destacándose los intervalos **(12,14] y (18,20]**.
+
+2. **Cluster 2 (cargas mayores):**
+   - Los usuarios con cargas mayores tienden a iniciar sus sesiones en la madrugada, especialmente entre **12 AM y 2 AM**.
+
+Para calcular la **hora estimada de inicio**, resté la duración de carga (`Calculated.Duration..hours.`) a la hora de finalización (`Charging.End.Time`). Este ajuste fue necesario porque la información de inicio no estaba explícita en el dataset. Este razonamiento es fundamental para identificar los momentos en que los usuarios inician sus cargas y no solo cuando terminan.
+
+---
+
+## Conclusión
+
+Este análisis me permitió:
+
+- Identificar patrones claros de carga utilizando técnicas de clustering.
+- Comprender la importancia de las horas estimadas de inicio para optimizar decisiones comerciales.
+- Segmentar a los usuarios en dos grupos relevantes: uno con cargas menores y otro con cargas mayores.
+
+Los resultados obtenidos cumplen con los objetivos de la actividad y proporcionan una base sólida para tomar decisiones basadas en datos.
