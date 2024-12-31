@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 En esta actividad final de analítica avanzada, mi objetivo es realizar un ejercicio de **segmentación o clustering** para identificar patrones en los datos de carga de vehículos eléctricos. Para ello, seleccioné variables relevantes, apliqué el algoritmo de clustering, interpreté los resultados y razoné las implicaciones comerciales basándome en los patrones encontrados.
 
-El análisis se enfoca en encontrar momentos clave para mostrar anuncios en función de los patrones de carga detectados. Específicamente, utilicé las horas de finalización de carga para calcular la hora estimada de inicio, dado que es más relevante para la toma de decisiones.
+El análisis se enfoca en encontrar momentos clave para mostrar anuncios en función de los patrones de carga detectados. Aunque el dataset incluye un timestamp para la hora de inicio de carga, este dato parece haber sido generado programáticamente, siguiendo un patrón evidente. Por este motivo, he optado por basar el análisis en la hora de finalización de la carga (`Charging.End.Time`), ya que considero que refleja mejor el comportamiento real de los usuarios.
 
 ---
 
@@ -21,9 +21,9 @@ El análisis se enfoca en encontrar momentos clave para mostrar anuncios en func
 Para este análisis seleccioné las siguientes variables:
 
 - **`Charge.Loaded` (carga realizada):** Representa la cantidad de energía cargada durante una sesión en kWh. Es crucial para distinguir entre usuarios con cargas grandes y pequeñas.
-- **`Estimated.Start.Time` (hora estimada de inicio):** Calculada como la hora de finalización menos la duración de la carga (`Calculated.Duration..hours.`). Esta variable es clave para determinar en qué momento los usuarios suelen comenzar sus cargas.
+- **`Charging.End.Time` (hora de finalización):** Hora exacta en la que el vehículo termina de cargarse. Utilicé esta variable porque es más confiable que la hora de inicio generada programáticamente.
 
-Ambas variables son esenciales para segmentar los usuarios y responder a preguntas comerciales, como identificar los mejores momentos para mostrar anuncios. La selección cumple con el requisito de trabajar con menos de 6 variables.
+Estas variables permiten segmentar a los usuarios en función de su comportamiento de carga, ignorando factores como el tipo de cargador o el rate. Independientemente de estos factores, considero que los usuarios que realizan cargas más largas están planificando trayectos extensos, mientras que las cargas rápidas corresponden a usuarios con necesidades inmediatas.
 
 ---
 
@@ -31,10 +31,10 @@ Ambas variables son esenciales para segmentar los usuarios y responder a pregunt
 
 1. **Preprocesamiento de datos:**
    - Filtré los datos para eliminar valores inconsistentes, como NA o cargas negativas.
-   - Calculé `Estimated.Start.Time` para determinar cuándo comienzan las cargas. Dado que el dataset incluye solo la hora de finalización (`Charging.End.Time`), esta variable se obtuvo restando la duración estimada de la carga (`Calculated.Duration..hours.`).
+   - Calculé `Estimated.Start.Time` restando la duración de carga (`Calculated.Duration..hours.`) a la hora de finalización (`Charging.End.Time`). Aunque este cálculo introduce cierta suposición, permite analizar los momentos en que los usuarios probablemente comiencen sus cargas.
 
 2. **Normalización:**
-   - Escalé las variables `Charge.Loaded` y `Estimated.Start.Time` para que tuvieran un rango similar, evitando que una de ellas dominara el clustering.
+   - Escalé las variables `Charge.Loaded` y `Charging.End.Time` para que tuvieran un rango similar, evitando que una dominara el clustering.
 
 3. **Aplicación del algoritmo:**
    - Utilicé el algoritmo de **K-Means clustering** con 2 clusters. Este número fue suficiente para segmentar usuarios con patrones distintos de carga.
@@ -68,7 +68,7 @@ Este gráfico muestra las frecuencias de las horas estimadas de inicio, agrupada
    - Los usuarios con cargas mayores tienden a iniciar sus sesiones principalmente entre **12 AM y 2 AM**, con 22 registros.
    - Existe actividad secundaria entre **6 AM y 8 AM** (12 registros) y en el intervalo **2 AM a 4 AM** (8 registros).
 
-Para calcular la **hora estimada de inicio**, resté la duración de carga (`Calculated.Duration..hours.`) a la hora de finalización (`Charging.End.Time`). Este ajuste fue necesario porque la información de inicio no estaba explícita en el dataset. Este razonamiento es fundamental para identificar los momentos en que los usuarios inician sus cargas y no solo cuando terminan.
+El razonamiento detrás del análisis de estas horas es que la hora de inicio calculada es más representativa para la planificación de anuncios. Este cálculo se basa en la hora de finalización, restando la duración de carga, ya que refleja un momento aproximado en que los usuarios llegan a la estación de carga.
 
 ---
 
@@ -80,4 +80,14 @@ Este análisis me permitió:
 - Comprender la importancia de las horas estimadas de inicio para optimizar decisiones comerciales.
 - Segmentar a los usuarios en dos grupos relevantes: uno con cargas menores y otro con cargas mayores.
 
-Los resultados obtenidos cumplen con los objetivos de la actividad y proporcionan una base sólida para tomar decisiones basadas en datos.
+### Tipos de anuncios sugeridos
+
+1. **Cluster 1 (cargas menores):**
+   - Usuarios que realizan cargas rápidas y suelen tener necesidades inmediatas. Sugerencias:
+     - **Anuncios de cafeterías y snacks:** Servicios rápidos y accesibles.
+     - **Promociones locales:** Descuentos en tiendas cercanas que pueden atraer atención en periodos cortos.
+
+2. **Cluster 2 (cargas mayores):**
+   - Usuarios que planifican trayectos largos y tienen sesiones prolongadas de carga. Sugerencias:
+     - **Anuncios de hoteles y servicios de descanso:** Relevantes para usuarios que necesitan más tiempo para cargar.
+     - **Servicios de mantenimiento automotriz:** Ideal para usuarios que aprovechan la carga para revisiones.
