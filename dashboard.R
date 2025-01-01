@@ -11,7 +11,7 @@ library(plotly)
 
 # Función para cargar datos
 load_data <- function() {
-  ruta_csv <- file.path(getwd(), "datasources", "ev_charging_patterns.csv")
+  ruta_csv <- file.path(getwd(), "ev_ad_strategy", "datasources", "ev_charging_patterns.csv")
   if (!file.exists(ruta_csv)) {
     stop("El archivo CSV no se encuentra en la ruta: ", ruta_csv)
   }
@@ -31,7 +31,8 @@ ui <- fluidPage(
                   choices = c("User Type" = "user_type",
                               "Day of Week" = "day_of_week",
                               "Charging Station Location" = "location",
-                              "End Hour" = "end_hour")),
+                              "End Hour" = "end_hour",
+                              "Charger Type" = "charger_type")),
       hr(),
       h5("Información del script:"),
       p("El análisis univariado se basa en el script:"),
@@ -110,6 +111,19 @@ server <- function(input, output, session) {
         geom_bar(stat = "identity", fill = "#2F4F4F") +
         scale_x_continuous(breaks = 0:23) +
         theme_minimal()
+      
+    } else if (input$plot_type == "charger_type") {
+      charger_colors <- c("DC Fast Charger" = "#FFD700", "Level 1" = "#8B0000", "Level 2" = "#32CD32")
+      charger_type_count <- data() %>%
+        group_by(Charger.Type) %>%
+        summarise(Count = n()) %>%
+        arrange(desc(Count))
+      
+      p <- ggplot(charger_type_count, aes(x = Charger.Type, y = Count, fill = Charger.Type)) +
+        geom_bar(stat = "identity") +
+        scale_fill_manual(values = charger_colors) +
+        theme_minimal() +
+        theme(legend.position = "none")
     }
     
     ggplotly(p)

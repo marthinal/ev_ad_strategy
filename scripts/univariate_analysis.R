@@ -2,12 +2,10 @@
 if (!require("ggplot2")) install.packages("ggplot2", repos = "http://cran.us.r-project.org")
 if (!require("dplyr")) install.packages("dplyr", repos = "http://cran.us.r-project.org")
 if (!require("plotly")) install.packages("plotly", repos = "http://cran.us.r-project.org")
-if (!require("htmltools")) install.packages("htmltools", repos = "http://cran.us.r-project.org")
 if (!require("forcats")) install.packages("forcats", repos = "http://cran.us.r-project.org")
 
 library(ggplot2)
 library(dplyr)
-library(plotly)
 library(forcats)
 
 # Función para cargar los datos
@@ -53,12 +51,26 @@ generate_day_of_week_plot <- function(data) {
     theme(legend.position = "none")
 }
 
-# Función para generar otros gráficos
-# (Crea funciones similares para los gráficos de Location, End Hour, etc.)
+# Función para generar el gráfico de Charger Type
+generate_charger_type_plot <- function(data) {
+  charger_colors <- c("DC Fast Charger" = "#FFD700", "Level 1" = "#8B0000", "Level 2" = "#32CD32")
+  
+  charger_type_count <- data %>%
+    group_by(Charger.Type) %>%
+    summarise(Count = n()) %>%
+    arrange(desc(Count))
+  
+  ggplot(charger_type_count, aes(x = Charger.Type, y = Count, fill = Charger.Type)) +
+    geom_bar(stat = "identity") +
+    scale_fill_manual(values = charger_colors) +
+    theme_minimal() +
+    theme(legend.position = "none")
+}
 
-# Exportar funciones
+# Exportar funciones en un único objeto
 univariate_analysis <- list(
   load_data = load_data,
   generate_user_type_plot = generate_user_type_plot,
-  generate_day_of_week_plot = generate_day_of_week_plot
+  generate_day_of_week_plot = generate_day_of_week_plot,
+  generate_charger_type_plot = generate_charger_type_plot
 )
