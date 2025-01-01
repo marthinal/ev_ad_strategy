@@ -11,7 +11,7 @@ library(plotly)
 
 # Función para cargar datos
 load_data <- function() {
-  ruta_csv <- file.path(getwd(), "ev_ad_strategy", "datasources", "ev_charging_patterns.csv")
+  ruta_csv <- file.path(getwd(), "datasources", "ev_charging_patterns.csv")
   if (!file.exists(ruta_csv)) {
     stop("El archivo CSV no se encuentra en la ruta: ", ruta_csv)
   }
@@ -37,7 +37,14 @@ ui <- fluidPage(
       h5("Información del script:"),
       p("El análisis univariado se basa en el script:"),
       a("Univariate Analysis", href = "https://github.com/marthinal/ev_ad_strategy/blob/main/scripts/univariate_analysis.R", target = "_blank"),
-      p("El script realiza los cálculos y genera los datos necesarios para las visualizaciones mostradas en el dashboard."),
+      p("Este script realiza los siguientes análisis:"),
+      tags$ul(
+        tags$li("Cuenta y agrupa usuarios por tipo (User Type), generando un gráfico de barras."),
+        tags$li("Analiza la distribución de cargas según los días de la semana (Day of Week), creando una visualización ordenada de mayor a menor."),
+        tags$li("Segmenta las ubicaciones de estaciones de carga (Charging Station Location) y produce un gráfico de barras."),
+        tags$li("Examina los patrones de carga por hora del día (End Hour) mediante un histograma."),
+        tags$li("Agrupa los tipos de cargadores (Charger Type) y visualiza su distribución con un gráfico de barras.")
+      ),
       width = 3
     ),
     mainPanel(
