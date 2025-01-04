@@ -9,46 +9,70 @@ library(ggplot2)
 library(dplyr)
 library(plotly)
 
-# Función para cargar datos
-load_data <- function() {
-  ruta_csv <- file.path(getwd(), "datasources", "ev_charging_patterns.csv")
-  if (!file.exists(ruta_csv)) {
-    stop("El archivo CSV no se encuentra en la ruta: ", ruta_csv)
-  }
-  data <- read.csv(ruta_csv, stringsAsFactors = FALSE)
-  data$Charging.End.Time <- as.POSIXct(data$Charging.End.Time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
-  data$End.Hour <- as.numeric(format(data$Charging.End.Time, "%H"))
-  return(data)
+# Ruta de los scripts
+univariate_script_path <- file.path(getwd(), "scripts", "univariate_analysis.R")
+bivariate_script_path <- file.path(getwd(), "scripts", "bivariate_complete.R")
+
+# Verificar y cargar scripts
+if (!file.exists(univariate_script_path)) {
+  stop("El script univariado no se encuentra en la ruta: ", univariate_script_path)
 }
+if (!file.exists(bivariate_script_path)) {
+  stop("El script bivariado no se encuentra en la ruta: ", bivariate_script_path)
+}
+
+source(univariate_script_path, local = TRUE)
+source(bivariate_script_path, local = TRUE)
+
+# Cargar datos
+load_data <- univariate_analysis$load_data
 
 # UI (Interfaz de usuario)
 ui <- fluidPage(
-  titlePanel("EV Charging Patterns - Univariate Analysis"),
+  titlePanel("EV Charging Patterns - Analysis"),
   sidebarLayout(
     sidebarPanel(
-      h4("Seleccione la visualización"),
-      selectInput("plot_type", "Gráfico:",
-                  choices = c("User Type" = "user_type",
-                              "Day of Week" = "day_of_week",
-                              "Charging Station Location" = "location",
-                              "End Hour" = "end_hour",
-                              "Charger Type" = "charger_type")),
+      h4("Seleccione el tipo de análisis"),
+      selectInput("analysis_type", "Tipo de análisis:",
+                  choices = c("Univariado" = "univariate",
+                              "Bivariado" = "bivariate")),
       hr(),
-      h5("Información del script:"),
-      p("El análisis univariado se basa en el script:"),
-      a("Univariate Analysis", href = "https://github.com/marthinal/ev_ad_strategy/blob/main/scripts/univariate_analysis.R", target = "_blank"),
-      p("Este script realiza los siguientes análisis:"),
-      tags$ul(
-        tags$li("Cuenta y agrupa usuarios por tipo (User Type), generando un gráfico de barras."),
-        tags$li("Analiza la distribución de cargas según los días de la semana (Day of Week), creando una visualización ordenada de mayor a menor."),
-        tags$li("Segmenta las ubicaciones de estaciones de carga (Charging Station Location) y produce un gráfico de barras."),
-        tags$li("Examina los patrones de carga por hora del día (End Hour) mediante un histograma."),
-        tags$li("Agrupa los tipos de cargadores (Charger Type) y visualiza su distribución con un gráfico de barras.")
+      conditionalPanel(
+        condition = "input.analysis_type == 'univariate'",
+        h5("Información del script univariado"),
+        p("El análisis univariado utiliza el siguiente script:"),
+        a("Univariate Analysis Script", 
+          href = "https://github.com/marthinal/ev_ad_strategy/blob/main/scripts/univariate_analysis.R", 
+          target = "_blank"),
+        h5("Seleccione la visualización univariada"),
+        selectInput("univariate_plot", "Gráfico:",
+                    choices = c("User Type" = "user_type",
+                                "Day of Week" = "day_of_week",
+                                "Charging Station Location" = "location",
+                                "End Hour" = "end_hour",
+                                "Charger Type" = "charger_type"))
+      ),
+      conditionalPanel(
+        condition = "input.analysis_type == 'bivariate'",
+        h5("Información del script bivariado"),
+        p("El análisis bivariado utiliza el siguiente script:"),
+        a("Bivariate Complete Script", 
+          href = "https://github.com/marthinal/ev_ad_strategy/blob/main/scripts/bivariate_complete.R", 
+          target = "_blank"),
+        h5("Seleccione la visualización bivariada"),
+        selectInput("bivariate_plot", "Gráfico:",
+                    choices = c("User Type vs End Time" = "user_type_end_time",
+                                "User Type vs Location" = "user_type_location",
+                                "Charger Type vs Day of Week" = "charger_type_day_of_week",
+                                "End Time vs Day of Week" = "end_time_day_of_week"))
       ),
       width = 3
     ),
     mainPanel(
       plotlyOutput("main_plot"),
+      hr(),
+      h4("Explicación del análisis seleccionado"),
+      textOutput("analysis_explanation"),
       width = 9
     )
   )
@@ -57,83 +81,41 @@ ui <- fluidPage(
 # Servidor
 server <- function(input, output, session) {
   data <- reactive({
-    load_data()
+    load_data(file.path(getwd(), "datasources", "ev_charging_patterns.csv"))
   })
   
   output$main_plot <- renderPlotly({
-    req(input$plot_type)
+    req(input$analysis_type)
+    plot <- NULL
     
-    if (input$plot_type == "user_type") {
-      user_colors <- c("Commuter" = "#708090", "Long-Distance Traveler" = "#4682B4", "Casual Driver" = "#A9A9A9")
-      user_type_count <- data() %>%
-        group_by(User.Type) %>%
-        summarise(Count = n()) %>%
-        arrange(desc(Count))
-      
-      user_type_count$User.Type <- factor(user_type_count$User.Type, levels = names(user_colors))
-      
-      p <- ggplot(user_type_count, aes(x = User.Type, y = Count, fill = User.Type)) +
-        geom_bar(stat = "identity") +
-        scale_fill_manual(values = user_colors) +
-        theme_minimal() +
-        theme(legend.position = "none")
-      
-    } else if (input$plot_type == "day_of_week") {
-      day_colors <- c("Sunday" = "#B0C4DE", "Monday" = "#778899", "Tuesday" = "#6A5ACD",
-                      "Wednesday" = "#8B4513", "Thursday" = "#CD853F", "Friday" = "#556B2F", "Saturday" = "#8FBC8F")
-      
-      dayofweek_count <- data() %>%
-        group_by(Day.of.Week) %>%
-        summarise(Count = n()) %>%
-        arrange(desc(Count))
-      
-      p <- ggplot(dayofweek_count, aes(x = Day.of.Week, y = Count, fill = Day.of.Week)) +
-        geom_bar(stat = "identity") +
-        scale_fill_manual(values = day_colors) +
-        theme_minimal() +
-        theme(legend.position = "none")
-      
-    } else if (input$plot_type == "location") {
-      location_colors <- c("Los Angeles" = "#5F9EA0", "San Francisco" = "#4682B4",
-                           "Houston" = "#A0522D", "New York" = "#6B8E23", "Chicago" = "#BDB76B")
-      
-      location_count <- data() %>%
-        group_by(Charging.Station.Location) %>%
-        summarise(Count = n()) %>%
-        arrange(desc(Count))
-      
-      p <- ggplot(location_count, aes(x = Charging.Station.Location, y = Count, fill = Charging.Station.Location)) +
-        geom_bar(stat = "identity") +
-        scale_fill_manual(values = location_colors) +
-        theme_minimal() +
-        theme(legend.position = "none")
-      
-    } else if (input$plot_type == "end_hour") {
-      hourly_end_count <- data() %>%
-        group_by(End.Hour) %>%
-        summarise(Count = n()) %>%
-        arrange(End.Hour)
-      
-      p <- ggplot(hourly_end_count, aes(x = End.Hour, y = Count)) +
-        geom_bar(stat = "identity", fill = "#2F4F4F") +
-        scale_x_continuous(breaks = 0:23) +
-        theme_minimal()
-      
-    } else if (input$plot_type == "charger_type") {
-      charger_colors <- c("DC Fast Charger" = "#FFD700", "Level 1" = "#8B0000", "Level 2" = "#32CD32")
-      charger_type_count <- data() %>%
-        group_by(Charger.Type) %>%
-        summarise(Count = n()) %>%
-        arrange(desc(Count))
-      
-      p <- ggplot(charger_type_count, aes(x = Charger.Type, y = Count, fill = Charger.Type)) +
-        geom_bar(stat = "identity") +
-        scale_fill_manual(values = charger_colors) +
-        theme_minimal() +
-        theme(legend.position = "none")
+    if (input$analysis_type == "univariate") {
+      req(input$univariate_plot)
+      plot <- switch(input$univariate_plot,
+                     user_type = univariate_analysis$generate_user_type_plot(data()),
+                     day_of_week = univariate_analysis$generate_day_of_week_plot(data()),
+                     location = univariate_analysis$generate_charging_station_location_plot(data()),
+                     end_hour = univariate_analysis$generate_end_hour_plot(data()),
+                     charger_type = univariate_analysis$generate_charger_type_plot(data()))
+    } else if (input$analysis_type == "bivariate") {
+      req(input$bivariate_plot)
+      plot <- switch(input$bivariate_plot,
+                     user_type_end_time = bivariate_complete$generate_user_type_end_time_plot(data()),
+                     user_type_location = bivariate_complete$generate_user_type_location_plot(data()),
+                     charger_type_day_of_week = bivariate_complete$generate_charger_type_day_of_week_plot(data()),
+                     end_time_day_of_week = bivariate_complete$generate_end_time_day_of_week_plot(data()))
     }
     
-    ggplotly(p)
+    validate(need(!is.null(plot), "Error: No se pudo generar el gráfico."))
+    ggplotly(plot)
+  })
+  
+  output$analysis_explanation <- renderText({
+    req(input$analysis_type)
+    if (input$analysis_type == "univariate") {
+      "El análisis univariado examina una sola variable a la vez, mostrando su distribución y características principales."
+    } else if (input$analysis_type == "bivariate") {
+      "El análisis bivariado muestra la relación entre dos variables seleccionadas."
+    }
   })
 }
 
