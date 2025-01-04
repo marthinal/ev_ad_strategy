@@ -12,6 +12,7 @@ library(plotly)
 # Ruta de los scripts
 univariate_script_path <- file.path(getwd(), "scripts", "univariate_analysis.R")
 bivariate_script_path <- file.path(getwd(), "scripts", "bivariate_complete.R")
+multivariate_script_path <- file.path(getwd(), "scripts", "multivariate_analysis.R")
 
 # Verificar y cargar scripts
 if (!file.exists(univariate_script_path)) {
@@ -20,9 +21,13 @@ if (!file.exists(univariate_script_path)) {
 if (!file.exists(bivariate_script_path)) {
   stop("El script bivariado no se encuentra en la ruta: ", bivariate_script_path)
 }
+if (!file.exists(multivariate_script_path)) {
+  stop("El script multivariado no se encuentra en la ruta: ", multivariate_script_path)
+}
 
 source(univariate_script_path, local = TRUE)
 source(bivariate_script_path, local = TRUE)
+source(multivariate_script_path, local = TRUE)
 
 # Cargar datos
 load_data <- univariate_analysis$load_data
@@ -35,7 +40,8 @@ ui <- fluidPage(
       h4("Seleccione el tipo de análisis"),
       selectInput("analysis_type", "Tipo de análisis:",
                   choices = c("Univariado" = "univariate",
-                              "Bivariado" = "bivariate")),
+                              "Bivariado" = "bivariate",
+                              "Multivariado" = "multivariate")),
       hr(),
       conditionalPanel(
         condition = "input.analysis_type == 'univariate'",
@@ -65,6 +71,14 @@ ui <- fluidPage(
                                 "User Type vs Location" = "user_type_location",
                                 "Charger Type vs Day of Week" = "charger_type_day_of_week",
                                 "End Time vs Day of Week" = "end_time_day_of_week"))
+      ),
+      conditionalPanel(
+        condition = "input.analysis_type == 'multivariate'",
+        h5("Información del script multivariado"),
+        p("El análisis multivariado utiliza el siguiente script:"),
+        a("Multivariate Analysis Script", 
+          href = "https://github.com/marthinal/ev_ad_strategy/blob/main/scripts/multivariate_analysis.R", 
+          target = "_blank")
       ),
       width = 3
     ),
@@ -103,6 +117,8 @@ server <- function(input, output, session) {
                      user_type_location = bivariate_complete$generate_user_type_location_plot(data()),
                      charger_type_day_of_week = bivariate_complete$generate_charger_type_day_of_week_plot(data()),
                      end_time_day_of_week = bivariate_complete$generate_end_time_day_of_week_plot(data()))
+    } else if (input$analysis_type == "multivariate") {
+      plot <- multivariate_analysis$generate_multivariate_plot(data())
     }
     
     validate(need(!is.null(plot), "Error: No se pudo generar el gráfico."))
@@ -115,6 +131,8 @@ server <- function(input, output, session) {
       "El análisis univariado examina una sola variable a la vez, mostrando su distribución y características principales."
     } else if (input$analysis_type == "bivariate") {
       "El análisis bivariado muestra la relación entre dos variables seleccionadas."
+    } else if (input$analysis_type == "multivariate") {
+      "El análisis multivariado combina múltiples variables para examinar interacciones complejas entre ellas."
     }
   })
 }
