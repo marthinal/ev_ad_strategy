@@ -1,0 +1,105 @@
+---
+title: "EV Charging Patterns - Analysis"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+---
+
+```{r setup, include=FALSE}
+# Cargar librerías necesarias
+library(flexdashboard)
+library(ggplot2)
+library(plotly)
+library(dplyr)
+
+# Cargar los scripts de análisis
+univariate_analysis <- source("scripts/univariate_analysis.R")$value
+bivariate_complete <- source("scripts/bivariate_complete.R")$value
+multivariate_analysis <- source("scripts/multivariate_analysis.R")$value
+
+# Cargar datos
+load_data <- univariate_analysis$load_data
+data <- load_data(file.path(getwd(), "datasources", "ev_charging_patterns.csv"))
+```
+
+<div>
+  <label for="analysisDropdown">Seleccione el tipo de análisis:</label>
+  <select id="analysisDropdown">
+    <option value="univariate">Univariado</option>
+    <option value="bivariate">Bivariado</option>
+    <option value="multivariate">Multivariado</option>
+  </select>
+</div>
+
+Row
+-----------------------------------------------------------------------
+
+<div id="univariate" class="analysisContent" style="display: block;">
+```{r}
+plot1 <- univariate_analysis$generate_user_type_plot(data)
+ggplotly(plot1)
+```
+
+```{r}
+plot2 <- univariate_analysis$generate_day_of_week_plot(data)
+ggplotly(plot2)
+```
+
+```{r}
+plot3 <- univariate_analysis$generate_charging_station_location_plot(data)
+ggplotly(plot3) %>% layout(height = 600, width = 900)
+```
+
+```{r}
+plot4 <- univariate_analysis$generate_end_hour_plot(data)
+ggplotly(plot4) %>% layout(height = 600, width = 900)
+```
+
+```{r}
+plot5 <- univariate_analysis$generate_charger_type_plot(data)
+ggplotly(plot5) %>% layout(height = 600, width = 900)
+```
+
+</div>
+
+<div id="bivariate" class="analysisContent" style="display: none;">
+```{r}
+plot6 <- bivariate_complete$generate_user_type_end_time_plot(data)
+ggplotly(plot6) %>% layout(height = 600, width = 900)
+```
+
+```{r}
+plot7 <- bivariate_complete$generate_user_type_location_plot(data)
+ggplotly(plot7) %>% layout(height = 600, width = 900)
+```
+
+```{r}
+plot8 <- bivariate_complete$generate_charger_type_day_of_week_plot(data)
+ggplotly(plot8) %>% layout(height = 600, width = 900)
+```
+
+```{r}
+plot9 <- bivariate_complete$generate_end_time_day_of_week_plot(data)
+ggplotly(plot9) %>% layout(height = 600, width = 900)
+```
+</div>
+
+<div id="multivariate" class="analysisContent" style="display: none;">
+```{r}
+plot5 <- multivariate_analysis$generate_multivariate_plot(data)
+ggplotly(plot5)
+```
+</div>
+
+<script>
+  document.getElementById('analysisDropdown').addEventListener('change', function(e) {
+    const contents = document.querySelectorAll('.analysisContent');
+    contents.forEach(content => content.style.display = 'none');
+    const selected = e.target.value;
+    const selectedContent = document.getElementById(selected);
+    if (selectedContent) {
+      selectedContent.style.display = 'block';
+    }
+  });
+</script>
