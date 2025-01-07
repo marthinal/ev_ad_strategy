@@ -1,0 +1,98 @@
+
+---
+title: "Ad Strategy for EV Charging Stations. "
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: scroll
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+library(plotly)
+library(dplyr)
+
+# Simulación de carga de datos y gráficos
+source("scripts/univariate_analysis.R", local = TRUE)
+source("scripts/bivariate_complete.R", local = TRUE)
+source("scripts/multivariate_analysis.R", local = TRUE)
+
+load_data <- univariate_analysis$load_data
+data <- load_data(file.path(getwd(), "datasources", "ev_charging_patterns.csv"))
+
+# Gráficos univariados
+univariate_plot1 <- ggplotly(univariate_analysis$generate_user_type_plot(data))
+univariate_plot2 <- ggplotly(univariate_analysis$generate_day_of_week_plot(data))
+univariate_plot3 <- ggplotly(univariate_analysis$generate_charging_station_location_plot(data))
+univariate_plot4 <- ggplotly(univariate_analysis$generate_end_hour_plot(data))
+univariate_plot5 <- ggplotly(univariate_analysis$generate_charger_type_plot(data))
+
+# Gráficos bivariados
+bivariate_plot1 <- ggplotly(bivariate_complete$generate_user_type_end_time_plot(data))
+bivariate_plot2 <- ggplotly(bivariate_complete$generate_user_type_location_plot(data))
+bivariate_plot3 <- ggplotly(bivariate_complete$generate_charger_type_day_of_week_plot(data))
+bivariate_plot4 <- ggplotly(bivariate_complete$generate_end_time_day_of_week_plot(data))
+
+# Gráficos multivariados
+multivariate_plot <- ggplotly(multivariate_analysis$generate_multivariate_plot(data))
+```
+
+Univariate
+======================================================
+
+### Univariate Analysis: User Type
+```{r, echo=FALSE}
+univariate_plot1
+```
+
+### Univariate Analysis: Day of Week
+```{r, echo=FALSE}
+univariate_plot2
+```
+
+### Univariate Analysis: Charging Station Location
+```{r, echo=FALSE}
+univariate_plot3
+```
+
+### Univariate Analysis: End Hour
+```{r, echo=FALSE}
+univariate_plot4
+```
+
+### Univariate Analysis: Charger Type
+```{r, echo=FALSE}
+univariate_plot5
+```
+
+Bivariate
+======================================================
+
+### Bivariate Analysis: User Type vs End Time
+```{r, echo=FALSE}
+bivariate_plot1
+```
+
+### Bivariate Analysis: User Type vs Location
+```{r, echo=FALSE}
+bivariate_plot2
+```
+
+### Bivariate Analysis: Charger Type vs Day of Week
+```{r, echo=FALSE}
+bivariate_plot3
+```
+
+### Bivariate Analysis: End Time vs Day of Week
+```{r, echo=FALSE}
+bivariate_plot4
+```
+
+Multivariate
+======================================================
+
+### Multivariate Analysis
+```{r, echo=FALSE}
+multivariate_plot
+```
