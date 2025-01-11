@@ -1,12 +1,16 @@
-# Cargar librerías necesarias
+install.packages("ggcorrplot")
+
 library(dplyr)
 library(ggplot2)
 library(lubridate)
+library(reshape2)
+library(ggcorrplot)
 
 # Configurar rutas
 ruta_csv <- "~/ev_ad_strategy/datasources/ev_charging_patterns.csv"
 ruta_imagen_clustering <- "~/ev_ad_strategy/images/clustering_plot.png"
 ruta_imagen_barras <- "~/ev_ad_strategy/images/clustering_bar_chart.png"
+ruta_imagen_correlacion <- "~/ev_ad_strategy/images/correlation_matrix.png"
 
 # Cargar el dataset
 datos <- read.csv(ruta_csv)
@@ -38,6 +42,28 @@ datos_filtrados <- datos %>%
     !is.na(Calculated.Duration..hours.), # Validar cálculos realizados
     Charge.Loaded <= 100 # Filtrar registros con carga máxima del 100%
   )
+
+# Análisis de correlación
+variables_seleccionadas <- datos_filtrados %>%
+  select(Charge.Loaded, Estimated.Start.Time, Charging.Rate..kW., Energy.Consumed..kWh.)
+
+# Calcular la matriz de correlación
+matriz_correlacion <- cor(variables_seleccionadas, use = "complete.obs")
+
+# Visualizar la matriz numéricamente
+cat("\n--- Matriz de Correlación ---\n")
+print(matriz_correlacion)
+
+# Heatmap de la matriz de correlación
+heatmap_correlacion <- ggcorrplot(matriz_correlacion, lab = TRUE, colors = c("blue", "white", "red")) +
+  labs(
+    title = "Matriz de Correlación entre Variables",
+    subtitle = "Relaciones entre las variables seleccionadas"
+  ) +
+  theme_minimal()
+
+# Guardar el heatmap
+ggsave(ruta_imagen_correlacion, plot = heatmap_correlacion, width = 8, height = 6, dpi = 300, bg = "white")
 
 # Clustering con Charge.Loaded y Estimated.Start.Time
 # Escalar las variables seleccionadas
