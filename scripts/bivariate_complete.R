@@ -29,6 +29,22 @@ generate_user_type_end_time_plot <- function(data) {
   return(plot)
 }
 
+# Función: User Type vs Day of Week
+generate_user_type_day_of_week_plot <- function(data) {
+  dayofweek_data <- data %>%
+    group_by(User.Type, Day.of.Week) %>%
+    summarise(Count = n())
+  
+  plot <- ggplot(dayofweek_data, aes(x = Day.of.Week, y = Count, fill = User.Type)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    labs(title = "User Type vs Day of Week",
+         x = "Day of Week", y = "Number of Charges",
+         fill = "User Type") +
+    theme_minimal()
+  
+  return(plot)
+}
+
 # Función: User Type vs Location
 generate_user_type_location_plot <- function(data) {
   location_data <- data %>%
@@ -83,6 +99,7 @@ generate_end_time_day_of_week_plot <- function(data) {
 bivariate_complete <- list(
   load_data = load_data,
   generate_user_type_end_time_plot = generate_user_type_end_time_plot,
+  generate_user_type_day_of_week_plot = generate_user_type_day_of_week_plot,
   generate_user_type_location_plot = generate_user_type_location_plot,
   generate_charger_type_day_of_week_plot = generate_charger_type_day_of_week_plot,
   generate_end_time_day_of_week_plot = generate_end_time_day_of_week_plot
