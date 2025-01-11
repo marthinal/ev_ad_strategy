@@ -9,7 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 En esta actividad final de analítica avanzada, mi objetivo es realizar un ejercicio de **segmentación o clustering** para identificar patrones en los datos de carga de vehículos eléctricos. Para ello, seleccioné variables relevantes, apliqué el algoritmo de clustering, interpreté los resultados y razoné las implicaciones comerciales basándome en los patrones encontrados.
 
 El análisis se enfoca en encontrar momentos clave para mostrar anuncios en función de los patrones de carga detectados. Aunque el dataset incluye un timestamp para la hora de inicio de carga, este dato parece haber sido generado programáticamente, siguiendo un patrón evidente. Por este motivo, he optado por basar el análisis en la hora de finalización de la carga (`Charging.End.Time`), ya que considero que refleja mejor el comportamiento real de los usuarios.
@@ -32,19 +31,29 @@ Estas variables permiten segmentar a los usuarios en función de su comportamien
 1. **Preprocesamiento de datos:**
    - Filtré los datos para eliminar valores inconsistentes, como NA o cargas negativas.
    - Calculé `Estimated.Start.Time` restando la duración de carga (`Calculated.Duration..hours.`) a la hora de finalización (`Charging.End.Time`). Aunque este cálculo introduce cierta suposición, permite analizar los momentos en que los usuarios probablemente comiencen sus cargas.
+   - Validé los datos a través de una condición que compara la energía teórica consumida (`Theoretical.Energy.Consumed`) con la energía real (`Energy.Consumed..kWh.`), filtrando inconsistencias.
 
 2. **Normalización:**
    - Escalé las variables `Charge.Loaded` y `Charging.End.Time` para que tuvieran un rango similar, evitando que una dominara el clustering.
 
-3. **Aplicación del algoritmo:**
+3. **Análisis de correlación:**
+   - Generé una matriz de correlación entre las variables del dataset (`Charge.Loaded`, `Estimated.Start.Time`, entre otras). Esto permitió identificar relaciones significativas y eliminar redundancias que podrían sobreponderar los resultados del clustering.
+
+4. **Aplicación del algoritmo:**
    - Utilicé el algoritmo de **K-Means clustering** con 2 clusters. Este número fue suficiente para segmentar usuarios con patrones distintos de carga.
 
-4. **Análisis de frecuencias:**
-   - Agrupé las horas estimadas de inicio en intervalos de 2 horas para identificar los momentos más frecuentes en cada cluster.
+5. **Visualización:**
+   - Generé gráficos que muestran los resultados del clustering y las frecuencias de horas agrupadas en intervalos.
 
 ---
 
 ## Resultados
+
+### Matriz de correlación
+
+La matriz de correlación generada valida que las variables seleccionadas (`Charge.Loaded` y `Estimated.Start.Time`) son lo suficientemente independientes para usarse en el análisis. El heatmap a continuación ilustra visualmente estas relaciones:
+
+![Heatmap de correlación](../images/correlation_matrix.png)
 
 ### Visualización del clustering
 
@@ -69,6 +78,19 @@ Este gráfico muestra las frecuencias de las horas estimadas de inicio, agrupada
    - Existe actividad secundaria entre **6 AM y 8 AM** (12 registros) y en el intervalo **2 AM a 4 AM** (8 registros).
 
 El razonamiento detrás del análisis de estas horas es que la hora de inicio calculada es más representativa para la planificación de anuncios. Este cálculo se basa en la hora de finalización, restando la duración de carga, ya que refleja un momento aproximado en que los usuarios llegan a la estación de carga.
+
+---
+
+## Descripción del script de clustering
+
+El script de clustering utilizado en este análisis puede encontrarse en el siguiente enlace: [Clustering Script](https://github.com/marthinal/ev_ad_strategy/blob/main/scripts/clustering.R). Este script realiza los siguientes pasos principales:
+
+1. **Carga y limpieza de datos:** Se filtran valores inconsistentes y se realizan cálculos derivados como `Charge.Loaded` y `Estimated.Start.Time`.
+2. **Validación:** Los datos se filtran para mantener registros consistentes en cuanto a energía consumida y calculada.
+3. **Análisis de correlación:** Se calcula la matriz de correlación para evaluar la relación entre las variables seleccionadas.
+4. **Normalización:** Las variables seleccionadas se escalan para garantizar que estén en el mismo rango de valores.
+5. **Clustering:** Se aplica el algoritmo K-Means con un número predefinido de clusters (2 en este caso).
+6. **Visualización:** Se generan gráficos que muestran los resultados del clustering y las frecuencias de horas agrupadas en intervalos.
 
 ---
 
