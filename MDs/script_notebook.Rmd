@@ -1,0 +1,459 @@
+---
+title: "Script Notebook"
+author: "José Manuel Rodríguez Vélez"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Este cuadernillo detalla los scripts utilizados en el proyecto, describiendo brevemente sus objetivos y las salidas generadas. Los scripts están disponibles en el repositorio de GitHub: [Repositorio de Scripts](https://github.com/marthinal/ev_ad_strategy/tree/main/scripts).
+
+---
+
+## Scripts
+
+### `bivariate_analysis_endtime_dayofweek.R`
+
+- **Objetivo:** Analiza la relación entre la hora de finalización de carga (*End Time*) y el día de la semana (*Day of Week*).
+- **Descripción:**
+  - Carga los datos desde un archivo CSV.
+  - Crea las columnas `End.Hour` y `Day.of.Week`.
+  - Genera un heatmap y un boxplot para visualizar los patrones horarios y semanales de carga.
+  - Convierte los gráficos a visualizaciones interactivas y exporta un reporte HTML.
+- **Salida:** `bivariate_analysis_endtime_dayofweek.html`
+
+---
+
+### `bivariate_analysis_location_dayofweek.R`
+
+- **Objetivo:** Examina la relación entre la ubicación de las estaciones de carga (*Location*) y el día de la semana (*Day of Week*).
+- **Descripción:**
+  - Carga y transforma los datos desde un archivo CSV.
+  - Calcula la frecuencia de cargas por ubicación y día de la semana.
+  - Genera dos visualizaciones principales:
+    1. **Stacked Bar Plot:** Representa la distribución de cargas por día para cada ubicación.
+    2. **Heatmap:** Muestra las frecuencias de cargas como un mapa de calor.
+  - Convierte las visualizaciones a gráficos interactivos y los guarda en un reporte HTML.
+- **Salida:** `bivariate_analysis_location_dayofweek.html`
+
+---
+
+### `bivariate_analysis_usertype_endtime.R`
+
+- **Objetivo:** Explora la relación entre el tipo de usuario (*User Type*) y la hora de finalización de carga (*End Time*).
+- **Descripción:**
+  - Carga el dataset y transforma la columna `Charging.End.Time` al formato de fecha y hora.
+  - Crea la columna `End.Hour` que extrae la hora de finalización en formato numérico.
+  - Genera dos gráficos principales:
+    1. **Boxplot:** Visualiza la distribución de las horas de carga según el tipo de usuario.
+    2. **Line Plot:** Representa la frecuencia de cargas por hora y tipo de usuario.
+  - Crea un reporte interactivo en formato HTML que incluye ambos gráficos.
+- **Salida:** `bivariate_analysis_usertype_endtime.html`
+
+---
+
+### `bivariate_analysis_usertype_location.R`
+
+- **Objetivo:** Examina la relación entre el tipo de usuario (*User Type*) y la ubicación de las estaciones de carga (*Charging Station Location*).
+- **Descripción:**
+  - Agrupa los datos por tipo de usuario y ubicación de la estación para calcular frecuencias.
+  - Genera las siguientes visualizaciones:
+    1. **Gráfico de Barras:** Representa las frecuencias de usuarios por ubicación en formato agrupado.
+    2. **Gráfico de Mosaico:** Visualiza las interacciones entre tipo de usuario y ubicación de forma estructurada.
+  - Crea un archivo HTML interactivo que incluye el gráfico de barras y referencias al gráfico de mosaico.
+  - Guarda el gráfico de mosaico como una imagen PNG para referencia offline.
+- **Salidas:**
+  - Reporte HTML: `bivariate_analysis_usertype_location.html`
+  - Gráfico de mosaico: `mosaicplot_usertype_location.png`
+
+---
+
+### `bivariate_charger_dayofweek.R`
+
+- **Objetivo:** Analizar la relación entre el tipo de cargador (*Charger Type*) y el día de la semana (*Day of Week*).
+- **Descripción:**
+  - Agrupa los datos por tipo de cargador y día de la semana, calculando la frecuencia de cargas para cada combinación.
+  - Genera un **heatmap interactivo** que visualiza el número de cargas por tipo de cargador y día de la semana.
+  - Utiliza una paleta de colores personalizada para mejorar la interpretación de los datos.
+  - Crea un archivo HTML que contiene el heatmap interactivo.
+- **Salidas:**
+  - Reporte HTML: `bivariate_charger_dayofweek.html`
+
+---
+
+### `bivariate_charger_usertype.R`
+
+- **Objetivo:** Analizar la relación entre el tipo de cargador (*Charger Type*) y el tipo de usuario (*User Type*).
+- **Descripción:**
+  - Agrupa los datos por *Charger Type* y *User Type*, calculando el número de cargas para cada combinación.
+  - Genera un gráfico de barras interactivo para visualizar la frecuencia de cargas por cada combinación de cargador y usuario.
+  - Utiliza una paleta de colores personalizada para diferenciar los tipos de usuarios.
+  - El gráfico se convierte en un reporte interactivo HTML para análisis detallado.
+- **Salidas:**
+  - Reporte HTML: `bivariate_charger_usertype.html`
+
+---
+
+### `bivariate_complete.R`
+
+- **Objetivo:** Generar visualizaciones completas de relaciones bivariadas en los datos de patrones de carga de vehículos eléctricos.
+- **Descripción:**
+  - **Cargar datos:** Incluye una función para cargar y preprocesar datos desde un archivo CSV, convirtiendo la hora de finalización en formato numérico para análisis.
+  - **Relaciones clave visualizadas:**
+    1. **User Type vs End Time:** Línea que muestra la relación entre el tipo de usuario y la hora de finalización.
+    2. **User Type vs Day of Week:** Gráfico de barras que compara el tipo de usuario según el día de la semana.
+    3. **User Type vs Location:** Gráfico de barras que detalla la actividad de usuarios por ubicación de estación de carga.
+    4. **Charger Type vs Day of Week:** Mapa de calor para analizar el uso de cargadores según el día.
+    5. **End Time vs Day of Week:** Mapa de calor que representa la actividad según hora y día.
+- **Salidas:** Visualizaciones personalizadas que pueden integrarse en reportes para explorar relaciones bivariadas clave.
+
+---
+
+### `bivariate_usertype_endtime_analysis.R`
+
+- **Objetivo:** Realizar un análisis bivariado de las relaciones entre el tipo de usuario (*User Type*) y la hora de finalización de las cargas (*End Time*).
+- **Descripción:**
+  - **Cargar y preparar datos:**
+    - Convierte `Charging.End.Time` a formato de fecha y hora.
+    - Calcula la hora de finalización (*End Hour*) en formato numérico.
+  - **Visualizaciones generadas:**
+    1. **Line Plot:** Relaciona el número de cargas por tipo de usuario y la hora de finalización. 
+       - Permite identificar patrones horarios según el tipo de usuario.
+    2. **Boxplot:** Muestra la distribución de horas de finalización para cada tipo de usuario.
+       - Útil para observar rangos, medianas y valores atípicos.
+  - **Interactividad:** 
+    - Los gráficos generados se convierten en objetos interactivos utilizando **Plotly**, mejorando la experiencia exploratoria.
+  - **Exportación:**
+    - Genera un reporte HTML consolidando ambos gráficos para análisis y presentaciones.
+
+- **Salidas:**
+  - `bivariate_usertype_endtime_analysis.html`: Reporte interactivo que combina visualizaciones y análisis.
+
+--- 
+
+### `charge_loaded_vs_duration.R`
+
+- **Objetivo:** Analizar la relación entre la carga realizada (*Charge Loaded*) y la duración de carga (*Charging Duration*), e identificar correlaciones y tendencias.
+
+- **Descripción:**
+  - **Carga y limpieza de datos:**
+    - Filtra registros con valores faltantes en `State.of.Charge..Start...`, `State.of.Charge..End...` y `Charging.Duration..hours.`.
+    - Calcula la carga realizada (`Charge.Loaded`) como la diferencia entre el estado inicial y final de carga.
+    - Elimina valores negativos o nulos en `Charge.Loaded` y `Charging.Duration..hours.`.
+  - **Estadística descriptiva:**
+    - Genera un resumen estadístico de las variables analizadas.
+    - Calcula el coeficiente de correlación de Pearson para medir la relación entre ambas variables.
+  - **Modelo de regresión lineal:**
+    - Ajusta un modelo de regresión lineal con `Charge.Loaded` como variable independiente y `Charging.Duration..hours.` como dependiente.
+    - Proporciona un resumen del modelo para interpretar su significancia.
+  - **Visualización:**
+    - Crea un gráfico de dispersión con los datos y una línea de tendencia ajustada por el modelo de regresión.
+    - Resalta visualmente la relación entre ambas variables.
+
+- **Salidas:**
+  - **Gráfico generado:**
+    - `charge_loaded_vs_duration.png`: Representación visual de la relación entre carga realizada y duración.
+  - **Resultados clave:**
+    - Estadísticas descriptivas.
+    - Coeficiente de correlación de Pearson.
+    - Resumen del modelo de regresión lineal.
+    
+---
+
+### `charging_rate_vs_duration.R`
+
+**Descripción:** Este script analiza la relación entre la tasa de carga (`Charging.Rate..kW.`) y la duración de la carga (`Charging.Duration..hours.`) en el dataset. Incluye pasos de preprocesamiento, estadística descriptiva, cálculo de correlación y visualización.
+
+**Pasos clave:**
+1. **Carga de datos:** Se importa el dataset desde un archivo CSV especificado en `ruta_csv`.
+2. **Filtrado de datos:** 
+   - Se eliminan valores nulos (`NA`) en `Charging.Rate..kW.` y `Charging.Duration..hours.`.
+   - Se filtran los valores positivos para garantizar datos válidos.
+3. **Estadística descriptiva:** 
+   - Resúmenes estadísticos para `Charging.Rate..kW.` y `Charging.Duration..hours.`.
+   - Salida por consola de los resultados.
+4. **Cálculo de correlación:** 
+   - Se calcula el coeficiente de correlación de Pearson entre las dos variables clave.
+   - Resultado mostrado en consola.
+5. **Modelo de regresión lineal:**
+   - Se crea un modelo para estimar `Charging.Duration..hours.` en función de `Charging.Rate..kW.`.
+   - Resumen del modelo mostrado en consola.
+6. **Visualización:**
+   - Se genera un gráfico de dispersión con una línea de regresión ajustada.
+   - El gráfico muestra cómo la tasa de carga influye en la duración de la carga.
+
+--- 
+
+### `clustering.R`
+
+- **Objetivo:** Aplicar clustering para segmentar usuarios en función de la carga realizada (*Charge Loaded*) y la hora estimada de inicio (*Estimated Start Time*), e identificar patrones útiles para la toma de decisiones.
+
+- **Descripción:**
+  - **Carga y limpieza de datos:**
+    - Filtra registros con valores inconsistentes en `Charging.Rate..kW.`, `State.of.Charge..Start...`, y `State.of.Charge..End...`.
+    - Calcula variables derivadas como:
+      - `Charge.Loaded`: Diferencia entre el estado final e inicial de carga.
+      - `Estimated.Start.Time`: Hora estimada de inicio de la carga.
+    - Valida datos para garantizar consistencia energética entre energía consumida y energía teórica calculada.
+  - **Análisis de correlación:**
+    - Calcula una matriz de correlación entre las variables seleccionadas (`Charge.Loaded`, `Estimated.Start.Time`, entre otras).
+    - Genera un heatmap para visualizar relaciones significativas.
+  - **Clustering:**
+    - Escala las variables seleccionadas.
+    - Aplica el algoritmo *K-Means* para segmentar los datos en 2 clusters.
+    - Asigna los clusters resultantes al dataset.
+  - **Visualización:**
+    - Genera un gráfico de dispersión mostrando los clusters con `Charge.Loaded` y `Estimated.Start.Time`.
+    - Crea un gráfico de barras que muestra la frecuencia de las horas agrupadas en intervalos de 2 horas para cada cluster.
+
+- **Salidas:**
+  - **Gráficos generados:**
+    - `clustering_plot.png`: Visualización del clustering con dispersión.
+    - `clustering_bar_chart.png`: Frecuencia de horas agrupadas por cluster.
+    - `correlation_matrix.png`: Heatmap de la matriz de correlación.
+  - **Resultados clave:**
+    - Segmentación de usuarios en 2 clusters:
+      - Cluster 1: Usuarios con cargas menores en intervalos diurnos.
+      - Cluster 2: Usuarios con cargas mayores en intervalos nocturnos.
+    - Identificación de momentos clave para estrategias de personalización.
+  
+---
+
+### `import_EV_data_into_mysql.R`
+
+- **Objetivo:** Importar datos de patrones de carga de vehículos eléctricos desde un archivo CSV a una base de datos MySQL y verificar su correcta inserción.
+
+- **Descripción:**
+  - **Instalación y carga de librerías:**
+    - Comprueba e instala, si es necesario, las librerías `DBI` y `RMariaDB` para la conexión con MySQL.
+  - **Conexión a MySQL:**
+    - Se conecta a una base de datos local `EV_DS` utilizando credenciales definidas (`host`, `puerto`, `usuario`, `contraseña`).
+  - **Lectura del archivo CSV:**
+    - Carga el archivo `ev_charging_patterns.csv` en un objeto `data.frame` llamado `data_original`.
+  - **Inserción en MySQL:**
+    - Escribe los datos en una tabla MySQL llamada `charging_data`, sobrescribiendo los datos existentes si los hay.
+  - **Verificación:**
+    - Lee los datos desde MySQL en un objeto `data.frame` llamado `data_mysql`.
+    - Compara los datos originales con los de la base de datos para asegurar que no hay diferencias.
+    - Muestra un mensaje indicando si la inserción fue exitosa o señala discrepancias encontradas.
+  - **Desconexión:**
+    - Cierra la conexión con la base de datos una vez finalizado el proceso.
+
+- **Salidas:**
+  - **Tabla MySQL:** `charging_data`, que contiene los datos del archivo CSV.
+  - **Verificación de integridad:** Comparación entre los datos originales y los almacenados en MySQL.
+
+- **Características clave:**
+  - Automatiza la carga y validación de datos en MySQL.
+  - Proporciona mensajes claros sobre el estado del proceso de inserción.
+  - Facilita la integración de datos para análisis posteriores.
+
+---
+
+### `load_and_inspect_dataset.R`
+
+- **Objetivo:** Cargar un dataset de patrones de carga de vehículos eléctricos desde un archivo CSV, analizar su estructura inicial y generar un resumen visual para la exploración de datos.
+
+- **Descripción:**
+  - **Carga de datos:**
+    - Importa el archivo `ev_charging_patterns.csv` en un objeto `data.frame`.
+    - Utiliza `read.csv()` con `stringsAsFactors = FALSE` para preservar las cadenas de texto sin convertirlas a factores.
+  - **Instalación y carga de librerías:**
+    - Instala las librerías `skimr`, `knitr`, `kableExtra` y `dplyr` si no están previamente instaladas.
+    - Carga las librerías necesarias para el análisis y visualización de datos.
+  - **Análisis exploratorio:**
+    - Genera un resumen detallado de las variables utilizando `skim()` de la librería `skimr`.
+    - Convierte el resumen generado en un `data.frame` para su manipulación y visualización.
+  - **Visualización:**
+    - Utiliza `knitr::kable()` y `kableExtra` para crear una tabla en formato Markdown, con opciones de estilo como "striped", "hover" y "condensed".
+    - Añade un cuadro con scroll para manejar tablas extensas.
+  - **Exportación:**
+    - Exporta la tabla generada a un archivo HTML interactivo llamado `skim_summary.html`, ubicado en el directorio `reports`.
+
+- **Salidas:**
+  - **Resumen de datos:** Tabla interactiva en HTML que proporciona estadísticas descriptivas clave para cada variable del dataset.
+
+- **Características clave:**
+  - Simplifica la exploración inicial del dataset con resúmenes visuales y detallados.
+  - Automatiza la generación de un informe HTML accesible para compartir y analizar datos rápidamente.
+
+---
+
+### `logistic_regression.R`
+
+- **Objetivo:** Desarrollar y evaluar un modelo de regresión logística para predecir la probabilidad de acción comercial en base a la carga realizada (*Charge Loaded*) para el segmento de cargadores con rangos de velocidad de carga de 35-100 kW.
+
+- **Descripción:**
+  - **Carga y preprocesamiento de datos:**
+    - Importa datos desde el archivo `ev_charging_patterns.csv`.
+    - Filtra registros con valores faltantes o inconsistentes y segmenta el rango de velocidad de carga en categorías.
+    - Crea una variable binaria `Action.Commercial` basada en si la duración estimada de carga supera 1 hora.
+  - **Modelo de regresión logística:**
+    - Ajusta un modelo logístico utilizando `Charge.Loaded` como predictor de la probabilidad de acción comercial.
+    - Genera un resumen estadístico del modelo para evaluar su desempeño.
+  - **Predicción y visualización:**
+    - Calcula probabilidades predichas (`Predicted_Prob`) y clasificaciones binarias (`Predicted_Class`) usando un umbral de 0.6.
+    - Crea un gráfico que muestra la relación entre `Charge.Loaded` y las probabilidades predichas, con puntos coloreados según la predicción binaria.
+  - **Salida visual:**
+    - Exporta el gráfico como `logistic_regression_plot.png` en el directorio `html_report`.
+
+- **Salidas:**
+  - **Modelo:** Resumen detallado del modelo logístico, incluyendo coeficientes, errores estándar y métricas de ajuste.
+  - **Distribución:** Tabla de frecuencias para verificar la distribución de la variable dependiente `Action.Commercial`.
+  - **Gráfico generado:** Visualización interactiva que combina puntos predichos y una curva ajustada.
+
+- **Características clave:**
+  - Ofrece una interpretación clara de cómo la carga realizada influye en la probabilidad de acción comercial.
+  - Utiliza un enfoque práctico para segmentar datos y ajustar umbrales de predicción.
+
+---
+
+### `multivariate_analysis.R`
+
+- **Objetivo:** Analizar la relación multivariada entre el tipo de usuario (*User Type*), tipo de cargador (*Charger Type*), hora de finalización (*End Hour*), día de la semana (*Day of Week*), y localización de la estación de carga (*Charging Station Location*).
+
+- **Descripción:**
+  - **Carga y preprocesamiento de datos:**
+    - Carga datos desde un archivo CSV, asegurando que la columna `Charging.End.Time` se convierta a un formato de fecha y hora.
+    - Calcula variables derivadas como:
+      - **`End.Hour`:** Extrae la hora de finalización en formato numérico.
+      - **`Day.of.Week`:** Obtiene los días de la semana como abreviaturas (`Mon`, `Tue`, etc.) y los ordena cronológicamente.
+  - **Generación de gráficos:**
+    - Usa `ggplot2` para crear un gráfico multivariado que cruza las variables mencionadas.
+    - Muestra puntos coloreados por `User.Type`, con facetas por `Charger.Type` y `Charging.Station.Location`.
+    - Personaliza el gráfico con etiquetas rotadas para mejorar la legibilidad de los días de la semana.
+
+- **Salidas:**
+  - **Gráfico:** Un gráfico multivariado que permite visualizar patrones clave en función de las interacciones entre variables.
+  - **Facetas:** Proporciona insights adicionales al segmentar por tipo de cargador y localización.
+
+- **Características clave:**
+  - Resalta relaciones complejas entre múltiples variables clave del dataset.
+  - Facilita la identificación de patrones de carga específicos para diferentes segmentos de usuarios.
+
+---
+
+### `regression_bivariate_analysis.R`
+
+- **Objetivo:** Realizar un análisis bivariado y aplicar modelos de regresión lineal para identificar relaciones entre la tasa de carga (*Charging Rate*) y la duración de carga calculada (*Calculated Duration*), segmentando los datos por rangos de tasa de carga.
+
+- **Descripción:**
+  - **Carga y validación de datos:**
+    - Filtra registros para eliminar valores fuera de rango en `Charging.Rate..kW.` y asegura la consistencia entre las columnas `State.of.Charge..Start...` y `State.of.Charge..End...`.
+    - Crea variables calculadas:
+      - `Charge.Loaded`: Diferencia entre los estados inicial y final de carga.
+      - `Calculated.Duration..hours.`: Duración teórica de la carga en horas.
+      - `Rate.Range`: Agrupa los datos en rangos de tasa de carga (`0-10 kW`, `10-35 kW`, `35-100 kW`).
+
+  - **Análisis por rangos:**
+    - Divide los datos en grupos según `Rate.Range`.
+    - Calcula estadísticas descriptivas y correlación entre `Charging.Rate..kW.` y `Calculated.Duration..hours.`.
+    - Ajusta modelos de regresión lineal para cada rango, mostrando:
+      - Resumen del modelo.
+      - Coeficiente de correlación.
+      - Coeficientes de la regresión (intercepto y pendiente).
+  
+  - **Resultados:**
+    - Genera una tabla resumen con:
+      - Rango de tasa.
+      - Correlación entre tasa de carga y duración.
+      - R² del modelo de regresión.
+      - Coeficientes de la regresión (intercepto y pendiente).
+
+- **Salidas:**
+  - **Tabla HTML:** Se exporta un resumen de los resultados de la regresión lineal en formato HTML:
+    - Ruta: `~/ev_ad_strategy/html_report/regression_analysis_summary.html`.
+
+- **Características clave:**
+  - Segmenta y analiza los datos por rangos de tasa de carga para identificar patrones específicos.
+  - Facilita la interpretación de la relación entre la tasa de carga y la duración a través de modelos de regresión.
+
+---
+
+### `regression_charge_loaded_vs_duration.R`
+
+- **Objetivo:** Analizar la relación entre la carga realizada (*Charge Loaded*) y la duración teórica de carga (*Calculated Duration*), considerando variaciones en la tasa de carga (*Charging Rate*) y la temperatura.
+
+- **Descripción:**
+  - **Carga y validación de datos:**
+    - Se filtran registros con tasas de carga fuera del rango permitido (0 a 100 kW).
+    - Se valida la consistencia de los datos de carga inicial y final.
+    - Se eliminan registros con valores inconsistentes en la energía consumida y calculada.
+  - **Creación de variables derivadas:**
+    - `Charge.Loaded`: Diferencia entre el estado inicial y final de carga.
+    - `Calculated.Duration..hours.`: Duración estimada de carga basada en la tasa y la energía consumida.
+    - Rango de tasa de carga (`Rate.Range`) y porcentaje de carga (`Charge.Loaded.Range`).
+    - Logaritmo de variables normalizadas para análisis de regresión.
+  - **Análisis por rangos:**
+    - División de datos en rangos de tasa de carga y porcentajes de carga.
+    - Ajuste de modelos lineales para explorar relaciones entre temperatura, duración de carga y carga realizada.
+  - **Validación de modelos:**
+    - Comparación entre modelos lineales y cuadráticos utilizando métricas como AIC.
+    - Selección del modelo más adecuado para cada rango.
+  - **Visualización:**
+    - Gráficos interactivos que muestran las relaciones entre variables logarítmicas, segmentadas por rangos de tasa de carga.
+
+- **Salidas:**
+  - **Tablas HTML:**
+    - `regression_summary_table.html`: Resumen de datos filtrados y calculados.
+    - `tabla_ordenada_por_rate.html`: Tabla ordenada por tasa de carga.
+  - **Gráficos interactivos:**
+    - `regression_interactive_plot.html`: Gráfico interactivo que muestra líneas de regresión segmentadas por rangos.
+  - **Resultados clave:**
+    - Correlaciones y métricas de ajuste de modelos para cada rango.
+    - Determinación del mejor modelo (lineal o cuadrático) para cada combinación de rango de tasa y temperatura.
+
+---
+
+### `regression_summary_table.R`
+
+- **Objetivo:** Crear una tabla HTML que resuma los rangos de tasas de carga (*Charging Rates*) y tipos de cargadores (*Charger Type*), ordenados por la tasa de carga.
+
+- **Descripción:**
+  - **Carga y validación de datos:**
+    - Filtra registros con tasas de carga entre 0 y 100 kW.
+    - Verifica la consistencia en el estado de carga inicial y final.
+    - Filtra valores faltantes y valida la energía consumida teórica frente a la real.
+  - **Creación de variables derivadas:**
+    - `Charge.Loaded`: Diferencia entre el estado inicial y final de carga.
+    - `Theoretical.Energy.Consumed`: Energía consumida calculada en función del porcentaje de carga.
+    - `Rate.Range`: Clasificación de las tasas de carga en tres rangos principales (0-10 kW, 10-35 kW, y 35-100 kW).
+  - **Resumen de datos:**
+    - Selecciona columnas clave (`Rate.Range`, `Charger.Type`, `Charging.Rate..kW.`) y ordena por tasas de carga en orden ascendente.
+  - **Exportación de resultados:**
+    - Genera una tabla HTML con formato y encabezados claros.
+    - Guarda la tabla en un archivo HTML para uso en análisis y presentaciones.
+
+- **Salidas:**
+  - **Tabla HTML generada:**
+    - `regression_summary_table.html`: Resumen ordenado de tasas de carga y tipos de cargadores.
+  - **Ubicación de la tabla:**
+    - Guardada en el directorio `~/ev_ad_strategy/html_report/`.
+
+---
+
+### `univariate_analysis.R`
+
+- **Objetivo:** Realizar un análisis univariado de las variables clave en el conjunto de datos, generando gráficos que resuman patrones individuales.
+
+- **Descripción:**
+  - **Carga y preprocesamiento de datos:**
+    - Convierte el campo `Charging.End.Time` a un formato de fecha y hora para facilitar el análisis temporal.
+    - Extrae la hora de finalización (`End.Hour`) y organiza los días de la semana en un orden lógico.
+  - **Funciones de visualización:**
+    - **`generate_user_type_plot`:** Crea un gráfico de barras para visualizar la distribución de los tipos de usuarios (`User.Type`), destacando patrones en los perfiles de carga.
+    - **`generate_day_of_week_plot`:** Genera un gráfico de barras que muestra la frecuencia de sesiones de carga por día de la semana.
+    - **`generate_charging_station_location_plot`:** Visualiza la distribución de cargas en las distintas ubicaciones de estaciones de carga (`Charging.Station.Location`).
+    - **`generate_end_hour_plot`:** Muestra un histograma que representa la distribución de las horas de finalización de las sesiones de carga.
+    - **`generate_charger_type_plot`:** Crea un gráfico de barras que detalla la frecuencia de uso de cada tipo de cargador (`Charger.Type`).
+  - **Personalización de gráficos:**
+    - Asigna colores específicos a las categorías para mejorar la legibilidad.
+    - Aplica un tema minimalista para un diseño claro y profesional.
+
+- **Salidas:**
+  - Gráficos generados para cada variable analizada, listos para ser integrados en informes o presentaciones.
+
+---
