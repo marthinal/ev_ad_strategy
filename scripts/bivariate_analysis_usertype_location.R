@@ -1,4 +1,4 @@
-# Instalar y cargar librerías necesarias
+# Install and load necessary libraries
 if (!require("ggplot2")) install.packages("ggplot2", repos = "http://cran.us.r-project.org")
 if (!require("dplyr")) install.packages("dplyr", repos = "http://cran.us.r-project.org")
 if (!require("plotly")) install.packages("plotly", repos = "http://cran.us.r-project.org")
@@ -11,15 +11,15 @@ library(plotly)
 library(htmltools)
 library(vcd)
 
-# Leer el archivo CSV
+# Read the CSV file
 ruta_csv <- "~/ev_ad_strategy/datasources/ev_charging_patterns.csv"
 data <- read.csv(ruta_csv, stringsAsFactors = FALSE)
 
-# Verificar los primeros datos
+# Verify the first data
 print(head(data))
 
-# Análisis Bivariado: User Type vs Location
-# Gráfico de Barras
+# Bivariate Analysis: User Type vs Location
+# Bar Chart
 bar_chart_usertype_location <- data %>%
   group_by(User.Type, Charging.Station.Location) %>%
   summarise(Count = n()) %>%
@@ -32,13 +32,13 @@ bar_chart_usertype_location <- data %>%
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-# Gráfico de Mosaico
+# Mosaic Chart
 mosaic_usertype_location <- structable(~ User.Type + Charging.Station.Location, data = data)
 mosaicplot_usertype_location <- mosaic(mosaic_usertype_location, shade = TRUE, legend = TRUE,
                                        main = "Mosaic Plot of User Type vs Location",
                                        xlab = "Location", ylab = "User Type")
 
-# Crear el contenido HTML con los gráficos
+# Create HTML content with the charts
 html_content <- tags$div(
   tags$h1("Bivariate Analysis - User Type vs Location"),
   tags$h2("Bar Chart of User Type vs Location"),
@@ -48,11 +48,11 @@ html_content <- tags$div(
   tags$img(src = "mosaicplot_usertype_location.png", alt = "Mosaic Plot of User Type vs Location")
 )
 
-# Guardar el reporte en un archivo HTML
+# Save the report in an HTML file
 htmltools::save_html(html_content, file = "bivariate_analysis_usertype_location.html")
 cat("The report has been saved as 'bivariate_analysis_usertype_location.html'\n")
 
-# Guardar el Mosaic Plot como una imagen PNG
+# Save the Mosaic Plot as a PNG image
 png(filename = "mosaicplot_usertype_location.png", width = 800, height = 600)
 mosaic(mosaic_usertype_location, shade = TRUE, legend = TRUE,
        main = "Mosaic Plot of User Type vs Location",
